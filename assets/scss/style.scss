@@ -10,7 +10,18 @@ body {
 #container{
 	width : 100% ;
 	text-align : center ;
-	h2 {
-		font-size : 300% ;
+	h1 {
+		font-size : 500% ;
 	}
+}
+
+.table{
+    width: 100%;
+    height: 600px;
+    display:table;
+    text-align: center;
+}
+.table > *{
+    display:table-cell;
+    vertical-align: middle;
 }
