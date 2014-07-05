@@ -8,6 +8,7 @@
     <meta name="keywords" content="">
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.3/highcharts.js"></script>
     <title>INASHIP｜WEIGHT</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,6 +34,32 @@
       <div id="container">
         <h2>63.3kg</h2>
       </div>
+
+      <div id='container'></div>
+
+      <script type="text/javascript">
+
+      var chart;
+
+      function draw() {
+
+            // グラフオプションを指定
+            var options = {
+              // 出力先を指定
+              chart :{renderTo : "container"},
+              // データ系列を作成
+              series: [{name: "pi", data: [3,1,4,1,5]}]
+            }
+
+            // グラフを作成
+            chart = new Highcharts.Chart(options);
+
+      }
+
+      // ページがロードされた後に、グラフを出力する
+      document.body.onload = draw();
+
+      </script>
       <footer>
         <p>&nbsp;</p>
       </footer>
