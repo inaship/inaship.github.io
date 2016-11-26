@@ -51,6 +51,7 @@
 
       // 天気情報読み込みテスト
       function getWatherJSON() {
+        $('#dispArea').val();
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
           if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
