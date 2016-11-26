@@ -93,14 +93,16 @@
         $select.append(options);
       }
 
+      $(function () {
+        loadSetting();
+        setSelectedElement();
+      });
     </script>
   </head>
-  <body onload="setSelectedElement();">
+  <body>
     <div id="wapper">
       <div id="container">
         <div>GTS</div>
-        <div><button onclick="loadSetting()">外部のJSONファイルを読み込み</button></div>
-
         <div>
           <select id="selectedElement">
 
