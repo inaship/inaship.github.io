@@ -17,7 +17,7 @@
       var apiUrl = "http://api.potekanet.com";
       var authtext = "c3luY21hcms6a2Y3UFpiNzI=";
       //apiUrl = "";
-      authtext = "dGVzdHVzZXI6cGFzc3dvcmQ";
+      //authtext = "dGVzdHVzZXI6cGFzc3dvcmQ";
       function getJSON() {
         var req = new XMLHttpRequest();     // XMLHttpRequest オブジェクトを生成する
         req.onreadystatechange = function() {     // XMLHttpRequest オブジェクトの状態が変化した際に呼び出されるイベントハンドラ
@@ -27,7 +27,7 @@
         };
         var reqUrl = apiUrl + "/v1/area/real/ja/prefecture?jisCode=09,10&element=temp";
         req.open("GET", reqUrl, false); // HTTPメソッドとアクセスするサーバーの　URL　を指定
-        req.setRequestHeader("content-type","X-POTEKA-Authorization: " + authtext);
+        req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);             // 実際にサーバーへリクエストを送信
       }
     </script>
