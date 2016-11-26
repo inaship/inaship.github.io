@@ -19,6 +19,25 @@
       var apiUrl;
       var authtext;
 
+      var element = {
+        temp: "temp",       // 気温
+        humi: "humi",       // 湿度
+        press_l: "press_l", // 現地気圧
+        press_s: "press_s", // 海面気圧
+        wind_d: "wind_d",   // 風向
+        wind_s: "wind_s",   // 風速
+        solar: "solar",     // 日射
+        rain: "rain",       // 雨感
+        rain_f: "rain_f",   // 1時間雨量
+        rain_i: "rain_i",   // 降水強度
+        rain_c: "rain_c",   // 連続雨量
+        rain_e: "rain_e",   // 実効雨量
+        wbgt: "wbgt",       // 暑さ指数
+        weather: "weather"  // 天気
+      }
+
+      var api01 = "/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" // 矩形指定データ取得
+
       // 外部ファイル読み込み
       function loadSetting(){
         $.ajaxSetup({async: false});
@@ -43,15 +62,51 @@
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
       }
+
+      function setSelectedElement() {
+        var element = {
+          temp: "temp",       // 気温
+          humi: "humi",       // 湿度
+          press_l: "press_l", // 現地気圧
+          press_s: "press_s", // 海面気圧
+          wind_d: "wind_d",   // 風向
+          wind_s: "wind_s",   // 風速
+          solar: "solar",     // 日射
+          rain: "rain",       // 雨感
+          rain_f: "rain_f",   // 1時間雨量
+          rain_i: "rain_i",   // 降水強度
+          rain_c: "rain_c",   // 連続雨量
+          rain_e: "rain_e",   // 実効雨量
+          wbgt: "wbgt",       // 暑さ指数
+          weather: "weather"  // 天気
+        },
+        $select = $('#selectedElement'),
+        $option,
+        options,
+        isSelected;
+        // コールバック関数の引数の順序が $.each と異なることに注意。
+        options = $.map(characters, function (name, value) {
+          isSelected = (value === 'temp');
+          $option = $('<option>', { value: value, text: name, selected: isSelected });
+          return $option;
+        });
+        $select.append(options);
+      }
+
     </script>
   </head>
-  <body>
+  <body onload="setSelectedElement();">
     <div id="wapper">
       <div id="container">
         <div>GTS</div>
         <div><button onclick="loadSetting()">外部のJSONファイルを読み込み</button></div>
 
-        <div><button onclick="getWatherJSON();">天気データを取得して表示</button></div>
+        <div>
+          <select id="selectedElement">
+
+          </select>
+          <button onclick="getWatherJSON();">天気データを取得して表示</button>
+        </div>
         <div><textarea id="dispArea" rows="10" cols="80"></textarea></div>
       </div>
       <footer>
