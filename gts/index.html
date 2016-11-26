@@ -118,6 +118,10 @@
         $select.append(options);
       }
 
+      // パラメーターチェック
+      function checkParam() {
+        $('#dispParam').val(apParam["swPoint"].value);
+      }
       // イニシャライズ
       $(function () {
         loadSetting();
@@ -129,6 +133,8 @@
     <div id="wapper">
       <div id="container">
         <div>SGT</div>
+        <div><button onclick="checkParam();">パラメータチェック</button></div>
+        <div><textarea id="dispParam" rows="100" cols="50"></textarea></div>
         <div>
           <select id="selectedElement"></select>
           <button onclick="getWatherJSON();">天気データを取得して表示</button>
