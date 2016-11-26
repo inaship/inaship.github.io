@@ -79,9 +79,9 @@
         var reqUrl = apiDomain
                    + apiUrl[6]
                    + "?"
-                   + apParam["swPoint"].key + "=" + apParam["swPoint"].value + "&"
-                   + apParam["nePoint"].key + "=" + apParam["nePoint"].value + "&"
-                   + apParam["element"].key + "=" + $("#selectedElement").val();
+                   + "swPoint=" + apParam["swPoint"] + "&"
+                   + "nePoint=" + apParam["nePoint"] + "&"
+                   + "element=" + $("#selectedElement").val();
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
@@ -133,8 +133,6 @@
     <div id="wapper">
       <div id="container">
         <div>SGT</div>
-        <div><button onclick="checkParam();">パラメータチェック</button></div>
-        <div><textarea id="dispParam" rows="5" cols="50"></textarea></div>
         <div>
           <select id="selectedElement"></select>
           <button onclick="getWatherJSON();">天気データを取得して表示</button>
