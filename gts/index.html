@@ -89,7 +89,7 @@
         // コールバック関数の引数の順序が $.each と異なることに注意。
         options = $.map(elementValue, function (name, value) {
           isSelected = (value === 'temp');
-          $option = $('<option>', { value: vale, text: name, selected: isSelected });
+          $option = $('<option>', { value: value, text: name, selected: isSelected });
           return $option;
         });
         $select.append(options);
