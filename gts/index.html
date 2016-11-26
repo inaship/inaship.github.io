@@ -57,7 +57,7 @@
             $('#dispArea').val(req.responseText);
           }
         };
-        var reqUrl = apiUrl + "/v1/area/real/ja/prefecture?jisCode=09,10&element=temp";
+        var reqUrl = apiUrl + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val();
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
