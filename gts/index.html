@@ -15,10 +15,11 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script type="text/javascript">
-      var sgtLW;
+      var sgtLW;  // 設定用変数
       var apiUrl;
       var authtext;
 
+      // 外部ファイル読み込み
       function loadSetting(){
         $.ajaxSetup({async: false});
         $.getJSON("setting.json", function(json){
@@ -29,15 +30,12 @@
         $.ajaxSetup({async: true});
       }
 
-      function checkSgtLW(){
-        alert(sgtLW.app_name);
-      }
-
+      // 天気情報読み込みテスト
       function getWatherJSON() {
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
           if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
-            alert(req.responseText);
+            $('#dispArea').val(req.responseText);
           }
         };
         var reqUrl = apiUrl + "/v1/area/real/ja/prefecture?jisCode=09,10&element=temp";
@@ -51,9 +49,10 @@
     <div id="wapper">
       <div id="container">
         <div>GTS</div>
-        <div><button onclick="loadSetting()">laod setting</button></div>
-        <div><button onclick="checkSgtLW()">check setting</button></div>
-        <div><button onclick="getWatherJSON();">get json</button></div>
+        <div><button onclick="loadSetting()">外部のJSONファイルを読み込み</button></div>
+
+        <div><button onclick="getWatherJSON();">天気データを取得して表示</button></div>
+        <div><textarea id="dispArea"></textarea></div>
       </div>
       <footer>
         <p>&nbsp;</p>
