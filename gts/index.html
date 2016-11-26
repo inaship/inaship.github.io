@@ -60,7 +60,7 @@
         $.ajaxSetup({async: false});
         $.getJSON("setting.json", function(json){
           sgtLW = json;
-          apiUrl = sgtLW.api_url;
+          apiDomain = sgtLW.api_domain;
           authtext = sgtLW.auth_pass;
         })
         $.ajaxSetup({async: true});
@@ -79,9 +79,9 @@
         var reqUrl = apiDomain
                    + apiUrl[6]
                    + "?"
-                   + apParam.swPoint.key + "=" + apParam.swPoint.value + "&"
-                   + apParam.nePoint.key + "=" + apParam.nePoint.value + "&"
-                   + apParam.element.key + "=" + $("#selectedElement").val();
+                   + apParam["swPoint"].key + "=" + apParam["swPoint"].value + "&"
+                   + apParam["nePoint"].key + "=" + apParam["nePoint"].value + "&"
+                   + apParam["element"].key + "=" + $("#selectedElement").val();
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
