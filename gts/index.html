@@ -89,7 +89,7 @@
         // コールバック関数の引数の順序が $.each と異なることに注意。
         options = $.map(elementValue, function (name, value) {
           isSelected = (value === 'temp');
-          $option = $('<option>', { value: name, text: value, selected: isSelected });
+          $option = $('<option>', { value: vale, text: name, selected: isSelected });
           return $option;
         });
         $select.append(options);
@@ -111,7 +111,7 @@
           </select>
           <button onclick="getWatherJSON();">天気データを取得して表示</button>
         </div>
-        <div><textarea id="dispArea" rows="100" cols="30"></textarea></div>
+        <div><textarea id="dispArea" rows="100" cols="50"></textarea></div>
       </div>
       <footer>
         <p>&nbsp;</p>
