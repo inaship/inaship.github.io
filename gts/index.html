@@ -64,7 +64,7 @@
       }
 
       function setSelectedElement() {
-        var element = {
+        var elementValue = {
           temp: "temp",       // 気温
           humi: "humi",       // 湿度
           press_l: "press_l", // 現地気圧
@@ -85,7 +85,7 @@
         options,
         isSelected;
         // コールバック関数の引数の順序が $.each と異なることに注意。
-        options = $.map(characters, function (name, value) {
+        options = $.map(elementValue, function (name, value) {
           isSelected = (value === 'temp');
           $option = $('<option>', { value: value, text: name, selected: isSelected });
           return $option;
