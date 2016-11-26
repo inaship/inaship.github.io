@@ -18,7 +18,7 @@
 
       function loadSetting(){
         $.getJSON("setting.json", function(json){
-          alert(data.app_name + data.auth_pass);
+          alert(json.app_name + json.auth_pass);
         })
       }
 
