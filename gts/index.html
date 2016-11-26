@@ -37,6 +37,12 @@
       var apEndDate = {endDate: ""};      // 取得終了日時
       var apJisCode = {jisCode: ""};      // 都道府県 or 市町村コード
 
+      var apParam = {
+        swPoint: "35.368274",
+        nePoint: "138.937417",
+        element: ""
+      }
+
       var api01 = "/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" // 矩形指定データ取得
 
       var apiUrl = {
@@ -73,9 +79,9 @@
         var reqUrl = apiDomain
                    + apiUrl[6]
                    + "?"
-                   + apSwPoint.key + "=" + apSwPoint.value + "&"
-                   + apNePoint.key + "=" + apNePoint.value + "&"
-                   + apElement.key + "=" + $("#selectedElement").val();
+                   + apParam.swPoint.key + "=" + apParam.swPoint.value + "&"
+                   + apParam.nePoint.key + "=" + apParam.nePoint.value + "&"
+                   + apParam.element.key + "=" + $("#selectedElement").val();
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
