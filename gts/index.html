@@ -20,7 +20,7 @@
       function loadSetting(){
         $.ajaxSetup({async: false});
         $.getJSON("setting.json", function(json){
-          sgtLW = json.param;
+          sgtLW = json;
         })
         $.ajaxSetup({async: true});
       }
