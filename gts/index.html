@@ -10,18 +10,24 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>GTS - Index</title>
+    <title>SGT - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script type="text/javascript">
+      var sgtLW;
 
       function loadSetting(){
+        $.ajaxSetup({async: false});
         $.getJSON("setting.json", function(json){
-          alert(json.app_name + json.auth_pass);
+          sgtLW = json.param;
         })
+        $.ajaxSetup({async: true});
       }
 
+      function checkSgtLW(){
+        alert(sgtLW.app_name);
+      }
 
       var apiUrl = "http://api.potekanet.com";
       var authtext = "c3luY21hcms6a2Y3UFpiNzI=";
@@ -44,6 +50,7 @@
       <div id="container">
         <div>GTS</div>
         <div><button onclick="loadSetting()">laod setting</button></div>
+        <div><button onclick="checkSgtLW()">check setting</button></div>
         <div><button onclick="getWatherJSON();">get json</button></div>
       </div>
       <footer>
