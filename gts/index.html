@@ -64,22 +64,23 @@
         req.send(null);
       }
 
+      // 取得する情報を選択するセレクトボックスを生成
       function setSelectedElement() {
         var elementValue = {
-          temp: "temp",       // 気温
-          humi: "humi",       // 湿度
-          press_l: "press_l", // 現地気圧
-          press_s: "press_s", // 海面気圧
-          wind_d: "wind_d",   // 風向
-          wind_s: "wind_s",   // 風速
-          solar: "solar",     // 日射
-          rain: "rain",       // 雨感
-          rain_f: "rain_f",   // 1時間雨量
-          rain_i: "rain_i",   // 降水強度
-          rain_c: "rain_c",   // 連続雨量
-          rain_e: "rain_e",   // 実効雨量
-          wbgt: "wbgt",       // 暑さ指数
-          weather: "weather"  // 天気
+          temp: "気温",
+          humi: "湿度",
+          press_l: "現地気圧",
+          press_s: "海面気圧",
+          wind_d: "風向",
+          wind_s: "風速",
+          solar: "日射",
+          rain: "雨感",
+          rain_f: "1時間雨量",
+          rain_i: "降水強度",
+          rain_c: "連続雨量",
+          rain_e: "実効雨量",
+          wbgt: "暑さ指数",
+          weather: "天気"
         },
         $select = $('#selectedElement'),
         $option,
@@ -110,7 +111,7 @@
           </select>
           <button onclick="getWatherJSON();">天気データを取得して表示</button>
         </div>
-        <div><textarea id="dispArea" rows="10" cols="80"></textarea></div>
+        <div><textarea id="dispArea" rows="10" cols="200"></textarea></div>
       </div>
       <footer>
         <p>&nbsp;</p>
