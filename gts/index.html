@@ -16,27 +16,38 @@
     <![endif]-->
     <script type="text/javascript">
       var sgtLW;  // 設定用変数
-      var apiUrl;
+      var apiDomain;
       var authtext;
 
-      var element = {
-        temp: "temp",       // 気温
-        humi: "humi",       // 湿度
-        press_l: "press_l", // 現地気圧
-        press_s: "press_s", // 海面気圧
-        wind_d: "wind_d",   // 風向
-        wind_s: "wind_s",   // 風速
-        solar: "solar",     // 日射
-        rain: "rain",       // 雨感
-        rain_f: "rain_f",   // 1時間雨量
-        rain_i: "rain_i",   // 降水強度
-        rain_c: "rain_c",   // 連続雨量
-        rain_e: "rain_e",   // 実効雨量
-        wbgt: "wbgt",       // 暑さ指数
-        weather: "weather"  // 天気
-      }
+      // 各種パラメータ
+      var apSwPoint = {swPoint: "35.368274"};      // 南西端緯度経度
+      var apNePoint = {nePoint: "138.937417"};      // 北東端緯度経度
+      var apElement = {element: ""};      // 観測要素
+      var apDataPeriod = {dataPeriod: 1}; // 予報収集時間（1〜36）
+      var apInterval = {interval: 1};     // データ間隔 （1,3,6）
+      var apPoteka = {poteka: true};      // POTEKAデータ有無 bool
+      var apAmedas = {amedas: true};      // アメダスデータ有無 bool
+      var apRader = {lader: true};        // 雨雲レーダー画像有無 bool
+      var apZoomLevel = {zoomLevel: 4};   // ズームレベル（4〜12）
+      var apX = {x: null};                // Xタイル番号
+      var apY = {y: null};                // Yタイル番号
+      var apDatetime = {datatime: ""};    // 取得日時
+      var apAmedasId = {amedasId: ""};    // アメダスID
+      var apStartDate = {startDate: ""};  // 取得開始日時
+      var apEndDate = {endDate: ""};      // 取得終了日時
+      var apJisCode = {jisCode: ""};      // 都道府県 or 市町村コード
 
       var api01 = "/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" // 矩形指定データ取得
+
+      var apiUrl = {
+        "/v1/area/real/rectangle": "矩形指定データ-1",        //
+        "/v1/area/real/ja/prefecture": "都道府県指定データ",   //
+        "/v1/area/real/ja/city": "市町村指定データ",          //
+        "/v1/point/real/ja/poteka": "POTEKA指定データ",     //
+        "/v1/area/point/ja/amedas": "アメダス指定データ",     //
+        "/v1/area/point/ja/radar": "雨雲レーダー指定データ",   //
+        "/v1/area/forecast/rectangle": "矩形指定データ-2"    //
+      }
 
       // 外部ファイル読み込み
       function loadSetting(){
@@ -58,7 +69,13 @@
             $('#dispArea').val(req.responseText);
           }
         };
-        var reqUrl = apiUrl + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val();
+        //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val();
+        var reqUrl = apiDomain
+                   + apiUrl[6]
+                   + "?"
+                   + apSwPoint.key + "=" + apSwPoint.value + "&"
+                   + apNePoint.key + "=" + apNePoint.value + "&"
+                   + apElement.key + "=" + $("#selectedElement").val();
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
@@ -95,6 +112,7 @@
         $select.append(options);
       }
 
+      // イニシャライズ
       $(function () {
         loadSetting();
         setSelectedElement();
@@ -104,11 +122,9 @@
   <body>
     <div id="wapper">
       <div id="container">
-        <div>GTS</div>
+        <div>SGT</div>
         <div>
-          <select id="selectedElement">
-
-          </select>
+          <select id="selectedElement"></select>
           <button onclick="getWatherJSON();">天気データを取得して表示</button>
         </div>
         <div><textarea id="dispArea" rows="100" cols="50"></textarea></div>
