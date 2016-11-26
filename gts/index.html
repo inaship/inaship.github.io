@@ -8,7 +8,7 @@
     <meta name="keywords" content="">
     <meta name=”robots” content=”noindex,follow” />
     <!--<base href="http://inaship.github.com/">-->
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
     <title>GTS - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,8 +22,9 @@
             alert(req.responseText);              // 取得した JSON ファイルの中身を表示
           }
         };
-        req.setRequestHeader("content-type","X-POTEKA-Authorization: c3luY21hcms6a2Y3UFpiNzI=");
+
         req.open("GET", "http://api.potekanet.com/v1/area/real/ja/prefecture?jisCode=09,10&element=temp", false); // HTTPメソッドとアクセスするサーバーの　URL　を指定
+        req.setRequestHeader("content-type","X-POTEKA-Authorization: c3luY21hcms6a2Y3UFpiNzI=");
         req.send(null);             // 実際にサーバーへリクエストを送信
       }
     </script>
