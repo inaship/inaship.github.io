@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT1-APP - Index</title>
+    <title>SGT2-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -122,7 +122,16 @@
         var elements = $('.elements:checked').map(function() {
           return $(this).val();
         });
-        alert(elements.text);
+        outputElements(elements);
+      }
+
+      function outputElements(elements) {
+        for(var i in elements){
+          var h = elements[i].list
+                + ' = '
+                + elements[i].content;
+        }
+        alert(h);
       }
 
       // イニシャライズ
