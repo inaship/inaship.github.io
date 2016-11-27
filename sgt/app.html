@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT27-APP - Index</title>
+    <title>SGT28-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -57,7 +57,7 @@
             $('#dispArea').val(resText);
             watherJson = JSON.parse(resText);
             console.log("watherJson = " + watherJson);
-            outputJson();
+            outputJson(watherJson);
           }
         };
         reqUrl = createRecUrl(elements);
@@ -66,13 +66,13 @@
         req.send(null);
       }
 
-      function outputJson(){
+      function outputJson(j){
         var
           ulObj = $("#dispDiv"),
-          len = watherJson.length;
+          len = j.length;
         console.log("len = " + len);
         for(var i = 0; i < len; i++) {
-          ulObj.append($("<li>").attr({"id":watherJson[i].id}).text(watherJson[i].name));
+          ulObj.append($("<li>").attr({"id":j[i].id}).text(j[i].name));
         }
       }
 
