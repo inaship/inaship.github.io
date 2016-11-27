@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT-6 - Index</title>
+    <title>SGT-7 - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -77,23 +77,15 @@
             $('#dispArea').val(req.responseText);
           }
         };
-        // temp
-        // /v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=temp
-        // /v1/area/real/ja/prefecture?jisCode=09,10&element=temp
-        // /v1/area/real/ja/city?jisCode=10204&element=temp
-        // /v1/point/real/ja/poteka?potekaId=235&element=temp
-        // /v1/point/real/ja/amedas?amedasId=42302&element=temp
-        // /v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00
-        // /v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=temp
 
-        //var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" + $("#selectedElement").val();
+        var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&" + apParam["nePoint"] + "&element=" + $("#selectedElement").val();
         //var reqUrl = apiDomain + "/v1/area/real/ja/city?jisCode=10204&element=" + $("#selectedElement").val();  // 取得できる
         //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val(); // 取得できる
         //var reqUrl = apiDomain + "/v1/point/real/ja/poteka?potekaId=235&element=" + $("#selectedElement").val();  // 取得できる
         //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=42302&element=" + $("#selectedElement").val();  // 取得できる
         //var reqUrl = apiDomain + "/v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00" ; // 400 (Bad Request)で取得できない
         //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=42302&element=" + $("#selectedElement").val(); // 取得できる
-        var reqUrl = apiDomain + "/v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" + $("#selectedElement").val();
+        //var reqUrl = apiDomain + "/v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" + $("#selectedElement").val(); // 'Access-Control-Allow-Origin'で取得できない
 
         /*
         var reqUrl = apiDomain
@@ -158,7 +150,7 @@
           <select id="selectedElement"></select>
           <button onclick="getWatherJSON();">天気データを取得して表示</button>
         </div>
-        <div><textarea id="dispArea" rows="100" cols="50"></textarea></div>
+        <div><textarea id="dispArea" rows="50" cols="50"></textarea></div>
       </div>
       <footer>
         <p>&nbsp;</p>
