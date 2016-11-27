@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGTB - Index</title>
+    <title>SGTC - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -86,15 +86,15 @@
         // /v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=temp
 
         //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val();
-        // http://api.potekanet.com/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=temp
-
+        var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" + $("#selectedElement").val();
+        /*
         var reqUrl = apiDomain
                    + apiUrl["矩形指定データ-2"]
                    + "?"
                    + "swPoint=" + apParam["swPoint"] + "&"
                    + "nePoint=" + apParam["nePoint"] + "&"
                    + "element=" + $("#selectedElement").val();
-
+        */
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
