@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT8-APP - Index</title>
+    <title>SGT9-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -40,6 +40,8 @@
         amedasId: "42302"
       }
 
+
+
       // 天気情報読み込みテスト
       function getWatherJSON() {
         getCheckElements();
@@ -50,19 +52,28 @@
             $('#dispArea').val(req.responseText);
           }
         };
-
-        //var reqUrl = apiDomain + "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + elements;  // 取得できる
-        //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + elements; // 取得できる
-        //var reqUrl = apiDomain + "/v1/point/real/ja/poteka?potekaId=" + apParam["potekaId"] + "&element=" + elements;  // 取得できる
-        //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=" + apParam["amedasId"] + "&element=" + elements;  // 取得できる
-
-        var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&" + apParam["nePoint"] + "&element=" + elements; // 'Access-Control-Allow-Origin'で取得できない
-        //var reqUrl = apiDomain + "/v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00" ; // 400 (Bad Request)で取得できない
-        //var reqUrl = apiDomain + "/v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" + elements; // 'Access-Control-Allow-Origin'で取得できない
-
+        reqUrl = createRecUrl();
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
+      }
+
+      function createRecUrl(){
+        var retVal;
+        var s = $("#targetAPI").val();
+        var tgApi;
+        switch(s){
+          case 0 : tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + elements; break;
+          case 1 : tgApi = "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + elements; break;
+          case 2 : tgApi = "/v1/point/real/ja/poteka?potekaId=" + apParam["potekaId"] + "&element=" + elements; break;
+          case 3 : tgApi = "/v1/point/real/ja/amedas?amedasId=" + apParam["amedasId"] + "&element=" + elements; break;
+          case 4 : tgApi = "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + elements; break;
+          case 5 : tgApi = "/v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00"; break;
+          case 6 : tgApi = "/v1/area/forecast/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + elements;
+        }
+        retVal = apiDomain + tgApi;
+        console.log(retVal);
+        return retVal;
       }
 
       // チェックしたエレメントを取得
@@ -109,6 +120,15 @@
             <button onclick="getCheckElements();">チェックされた要素を確認</button>
         </div>
         <div>
+          <select id="targetAPI">
+            <option value="0" selected="selected">都道府県指定データ</option>
+            <option value="1">市町村指定データ</option>
+            <option value="2">POTEKA指定データ</option>
+            <option value="3">アメダス指定データ</option>
+            <option value="4">矩形指定データ（real）</option>
+            <option value="5">雨雲レーダー指定データ</option>
+            <option value="6">矩形指定データ（forecast）</option>
+          </select>
           <button onclick="getWatherJSON();">天気データを取得して表示</button>
         </div>
         <div><textarea id="dispArea" rows="50" cols="50"></textarea></div>
