@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT34 - Index</title>
+    <title>SGT35 - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -125,7 +125,7 @@
       function htmlJSON() {
         // 最初のキーの名前を取り出す
         var apiKey = watherJson[0];
-        console.log("apiKey = " + apiKey);
+        console.log("apiKey = " + JSON.stringify(watherJson));
         for(var i in watherJson){
           $("#dispDiv").append("<li><strong>" + watherJson[i].element + "</strong></li>");
           for(var j in watherJson[i].element){
