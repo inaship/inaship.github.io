@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT-7 - Index</title>
+    <title>SGT-8 - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -42,6 +42,7 @@
         //nePoint: "35.3679,138.9191",
         swPoint: "36.1769,138.9866",
         nePoint: "36.4369,139.4398",
+        jisCode_city: "10204",
         element: ""
       }
 
@@ -78,8 +79,8 @@
           }
         };
 
-        var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&" + apParam["nePoint"] + "&element=" + $("#selectedElement").val();
-        //var reqUrl = apiDomain + "/v1/area/real/ja/city?jisCode=10204&element=" + $("#selectedElement").val();  // 取得できる
+        //var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&" + apParam["nePoint"] + "&element=" + $("#selectedElement").val(); // 'Access-Control-Allow-Origin'で取得できない
+        var reqUrl = apiDomain + "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + $("#selectedElement").val();  // 取得できる
         //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val(); // 取得できる
         //var reqUrl = apiDomain + "/v1/point/real/ja/poteka?potekaId=235&element=" + $("#selectedElement").val();  // 取得できる
         //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=42302&element=" + $("#selectedElement").val();  // 取得できる
