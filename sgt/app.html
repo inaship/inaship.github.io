@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT4-APP - Index</title>
+    <title>SGT5-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -119,20 +119,10 @@
       // チェックしたエレメントを取得
       var elements;
       function getCheckElements() {
-        var elements = $('.elements:checked').map(function() {
-          return $(this).val();
-        });
-        outputElements(elements);
-      }
-
-      function outputElements(elements) {
-        var h;
-        for(var i in elements){
-          h += elements[i].list
-            + ' = '
-            + elements[i].content;
-        }
-        alert(h);
+        area = $('[class="elements"]:checked').map(function(){
+          return 'area[]=' + $(this).val()
+        }).get().join(',');
+        console.log(area);
       }
 
       // イニシャライズ
