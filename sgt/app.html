@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT12-APP - Index</title>
+    <title>SGT13-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -71,6 +71,7 @@
           case 4 : tgApi = "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + elements; break;
           case 5 : tgApi = "/v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00"; break;
           case 6 : tgApi = "/v1/area/forecast/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + elements; break;
+          default: tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + elements;
         }
         retVal = apiDomain + tgApi;
         console.log(retVal);
