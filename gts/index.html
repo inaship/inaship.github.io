@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGTA - Index</title>
+    <title>SGTB - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -48,13 +48,13 @@
       var api01 = "/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" // 矩形指定データ取得
 
       var apiUrl = {
-        "矩形指定データ-1": "/v1/area/real/rectangle",        //
-        "都道府県指定データ": "/v1/area/real/ja/prefecture",   //
-        "市町村指定データ": "/v1/area/real/ja/city",          //
-        "POTEKA指定データ": "/v1/point/real/ja/poteka",     //
-        "アメダス指定データ": "/v1/area/point/ja/amedas",     //
-        "雨雲レーダー指定データ": "/v1/area/point/ja/radar",   //
-        "矩形指定データ-2": "/v1/area/forecast/rectangle"    //
+        "矩形指定データ-1": "/v1/area/real/rectangle",        // 0
+        "都道府県指定データ": "/v1/area/real/ja/prefecture",   // 1
+        "市町村指定データ": "/v1/area/real/ja/city",          // 2
+        "POTEKA指定データ": "/v1/point/real/ja/poteka",     // 3
+        "アメダス指定データ": "/v1/area/point/ja/amedas",     // 4
+        "雨雲レーダー指定データ": "/v1/area/point/ja/radar",   // 5
+        "矩形指定データ-2": "/v1/area/forecast/rectangle"    // 6
       }
 
       // 外部ファイル読み込み
@@ -77,16 +77,24 @@
             $('#dispArea').val(req.responseText);
           }
         };
-        var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val();
+        // /v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=temp
+        // /v1/area/real/ja/prefecture?jisCode=09,10&element=temp
+        // /v1/area/real/ja/city?jisCode=10204&element=temp
+        // /v1/point/real/ja/poteka?potekaId=235&element=temp
+        // /v1/point/real/ja/amedas?amedasId=42302&element=temp
+        // /v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00
+        // /v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=temp
+
+        //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val();
         // http://api.potekanet.com/v1/area/real/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=temp
-        /*
+
         var reqUrl = apiDomain
-                   + apiUrl["矩形指定データ-1"]
+                   + apiUrl["矩形指定データ-2"]
                    + "?"
                    + "swPoint=" + apParam["swPoint"] + "&"
                    + "nePoint=" + apParam["nePoint"] + "&"
                    + "element=" + $("#selectedElement").val();
-        */
+
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
