@@ -9,8 +9,9 @@
     <meta name=”robots” content=”noindex,follow” />
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="https//cdn.rawgit.com/jgthms/bulma/master/css/bulma.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT17-APP - Index</title>
+    <title>SGT18-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -37,10 +38,14 @@
         jisCode_city: "10204",
         jisCode_pref: "09,10",
         potekaId: "235",
-        amedasId: "42302"
+        amedasId: "42302",
+        zoomLevel: "10",
+        x: "",
+        y: "",
+        datetime: "2015-11-26T19:30:00+00:00"
       };
 
-      // 天気情報読み込みテスト
+      // 天気情報読み込み
       function getWatherJSON() {
         var elements = getCheckElements();
         var req = new XMLHttpRequest();
@@ -55,21 +60,49 @@
         req.send(null);
       }
 
+      // apiURLを生成
       function createRecUrl(el){
         var retVal;
         var s = Number($("#targetAPI").val());
         console.log("elements =" + el );
         console.log("s = " + s);
-        var tgApi = "";
+        var tgApi;
         switch(s){
-          case 0 : tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + el; break;
-          case 1 : tgApi = "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + el; break;
-          case 2 : tgApi = "/v1/point/real/ja/poteka?potekaId=" + apParam["potekaId"] + "&element=" + el; break;
-          case 3 : tgApi = "/v1/point/real/ja/amedas?amedasId=" + apParam["amedasId"] + "&element=" + el; break;
-          case 4 : tgApi = "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + el; break;
-          case 5 : tgApi = "/v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00"; break;
-          case 6 : tgApi = "/v1/area/forecast/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + el; break;
-          default: tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + el;
+          case 0 : tgApi = "/v1/area/real/ja/prefecture"
+                         + "?jisCode=" + apParam["jisCode_pref"]
+                         + "&element=" + el;
+            break;
+          case 1 : tgApi = "/v1/area/real/ja/city"
+                         + "?jisCode=" + apParam["jisCode_city"]
+                         + "&element=" + el;
+            break;
+          case 2 : tgApi = "/v1/point/real/ja/poteka"
+                         + "?potekaId=" + apParam["potekaId"]
+                         + "&element=" + el;
+            break;
+          case 3 : tgApi = "/v1/point/real/ja/amedas"
+                         + "?amedasId=" + apParam["amedasId"]
+                         + "&element=" + el;
+            break;
+          case 4 : tgApi = "/v1/area/real/rectangle"
+                         + "?swPoint=" + apParam["swPoint"]
+                         + "&nePoint=" + apParam["nePoint"]
+                         + "&element=" + el;
+            break;
+          case 5 : tgApi = "/v1/point/real/ja/radar"
+                         + "?zoomLevel=" + apParam["zoomLevel"]
+                         + "&x=" + apParam["x"]
+                         + "&y=" + apParam["y"]
+                         + "&datetime=" + apParam["datetime"];
+            break;
+          case 6 : tgApi = "/v1/area/forecast/rectangle"
+                         + "?swPoint=" + apParam["swPoint"]
+                         + "&nePoint=" + apParam["nePoint"]
+                         + "&element=" + el;
+            break;
+          default: tgApi = "/v1/area/real/ja/prefecture"
+                         + "?jisCode=" + apParam["jisCode_pref"]
+                         + "&element=" + el;
         }
         retVal = apiDomain + tgApi;
         console.log(retVal);
