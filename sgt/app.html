@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT14-APP - Index</title>
+    <title>SGT16-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -42,7 +42,7 @@
 
       // 天気情報読み込みテスト
       function getWatherJSON() {
-        getCheckElements();
+        var elements = getCheckElements();
         $('#dispArea').val();
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
@@ -50,28 +50,27 @@
             $('#dispArea').val(req.responseText);
           }
         };
-        reqUrl = createRecUrl();
+        reqUrl = createRecUrl(elements);
         req.open("GET", reqUrl, false);
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
       }
 
-      function createRecUrl(){
+      function createRecUrl(el){
         var retVal;
         var s = Number($("#targetAPI").val());
-        console.log("jisCode_pref = " + apParam["jisCode_pref"]);
-        console.log("elements =" + elements );
+        console.log("elements =" + el );
         console.log("s = " + s);
         var tgApi = "";
         switch(s){
-          case 0 : tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + elements; break;
-          case 1 : tgApi = "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + elements; break;
-          case 2 : tgApi = "/v1/point/real/ja/poteka?potekaId=" + apParam["potekaId"] + "&element=" + elements; break;
-          case 3 : tgApi = "/v1/point/real/ja/amedas?amedasId=" + apParam["amedasId"] + "&element=" + elements; break;
-          case 4 : tgApi = "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + elements; break;
+          case 0 : tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + el; break;
+          case 1 : tgApi = "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + el; break;
+          case 2 : tgApi = "/v1/point/real/ja/poteka?potekaId=" + apParam["potekaId"] + "&element=" + el; break;
+          case 3 : tgApi = "/v1/point/real/ja/amedas?amedasId=" + apParam["amedasId"] + "&element=" + el; break;
+          case 4 : tgApi = "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + el; break;
           case 5 : tgApi = "/v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00"; break;
-          case 6 : tgApi = "/v1/area/forecast/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + elements; break;
-          default: tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + elements;
+          case 6 : tgApi = "/v1/area/forecast/rectangle?swPoint=" + apParam["swPoint"] + "&nePoint=" + apParam["nePoint"] + "&element=" + el; break;
+          default: tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + el;
         }
         retVal = apiDomain + tgApi;
         console.log(retVal);
@@ -79,23 +78,16 @@
       }
 
       // チェックしたエレメントを取得
-      var elements;
       function getCheckElements() {
-        elements = $('[class="elements"]:checked').map(function(){
+        var el = $('[class="elements"]:checked').map(function(){
           return $(this).val()
         }).get().join(',');
-        console.log(elements);
-        //opElements();
-      }
-
-      function opElements(){
-        alert(elements);
+        return el;
       }
 
       // イニシャライズ
       $(function () {
         loadSetting();
-        // setSelectedElement();
       });
     </script>
   </head>
@@ -104,36 +96,39 @@
       <div id="container">
         <div>SGT</div>
         <div>
-          <input type="checkbox" name="elementType" class="elements" value="temp" checked="checked">&nbsp;気温
-          <input type="checkbox" name="elementType" class="elements" value="humi">&nbsp;湿度
-          <input type="checkbox" name="elementType" class="elements" value="press_l">&nbsp;現地気圧
-          <input type="checkbox" name="elementType" class="elements" value="press_s">&nbsp;海面気圧
-          <input type="checkbox" name="elementType" class="elements" value="wind_d">&nbsp;風向
-          <input type="checkbox" name="elementType" class="elements" value="wind_s">&nbsp;風速
-          <input type="checkbox" name="elementType" class="elements" value="solar">&nbsp;日射
-          <input type="checkbox" name="elementType" class="elements" value="rain">&nbsp;雨感
-          <input type="checkbox" name="elementType" class="elements" value="rain_f">&nbsp;1時間雨量
-          <input type="checkbox" name="elementType" class="elements" value="rain_i">&nbsp;降水強度
-          <input type="checkbox" name="elementType" class="elements" value="rain_c">&nbsp;連続雨量
-          <input type="checkbox" name="elementType" class="elements" value="wbgt">&nbsp;暑さ指数
-          <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
+          <form name="sgtLiveWather">
+            <div>
+              <input type="checkbox" name="elementType" class="elements" value="temp" checked="checked">&nbsp;気温
+              <input type="checkbox" name="elementType" class="elements" value="humi">&nbsp;湿度
+              <input type="checkbox" name="elementType" class="elements" value="press_l">&nbsp;現地気圧
+              <input type="checkbox" name="elementType" class="elements" value="press_s">&nbsp;海面気圧
+              <input type="checkbox" name="elementType" class="elements" value="wind_d">&nbsp;風向
+              <input type="checkbox" name="elementType" class="elements" value="solar">&nbsp;日射
+              <br />
+              <input type="checkbox" name="elementType" class="elements" value="rain">&nbsp;雨感
+              <input type="checkbox" name="elementType" class="elements" value="rain_f">&nbsp;1時間雨量
+              <input type="checkbox" name="elementType" class="elements" value="rain_i">&nbsp;降水強度
+              <input type="checkbox" name="elementType" class="elements" value="rain_c">&nbsp;連続雨量
+              <input type="checkbox" name="elementType" class="elements" value="wbgt">&nbsp;暑さ指数
+              <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
+            </div>
+            <div>
+              <select id="targetAPI">
+                <option value="0" selected="selected">都道府県指定データ</option>
+                <option value="1">市町村指定データ</option>
+                <option value="2">POTEKA指定データ</option>
+                <option value="3">アメダス指定データ</option>
+                <option value="4">矩形指定データ（real）</option>
+                <option value="5">雨雲レーダー指定データ</option>
+                <option value="6">矩形指定データ（forecast）</option>
+              </select>
+              <button onclick="getWatherJSON();">天気データを取得して表示</button>
+            </div>
+            <div>
+              <textarea id="dispArea" rows="50" cols="50"></textarea>
+            </div>
+          </form>
         </div>
-        <div>
-            <button onclick="getCheckElements();">チェックされた要素を確認</button>
-        </div>
-        <div>
-          <select id="targetAPI">
-            <option value="0" selected="selected">都道府県指定データ</option>
-            <option value="1">市町村指定データ</option>
-            <option value="2">POTEKA指定データ</option>
-            <option value="3">アメダス指定データ</option>
-            <option value="4">矩形指定データ（real）</option>
-            <option value="5">雨雲レーダー指定データ</option>
-            <option value="6">矩形指定データ（forecast）</option>
-          </select>
-          <button onclick="getWatherJSON();">天気データを取得して表示</button>
-        </div>
-        <div><textarea id="dispArea" rows="50" cols="50"></textarea></div>
       </div>
       <footer>
         <p>&nbsp;</p>
