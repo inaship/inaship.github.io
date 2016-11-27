@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT19-APP - Index</title>
+    <title>SGT20-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -48,13 +48,13 @@
       var watherJson;
 
       // 天気情報読み込み
-      watherJson = function getWatherJSON() {
+      function getWatherJSON() {
         var elements = getCheckElements();
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
           if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
             $('#dispArea').val(req.responseText);
-            return req.responseText;
+            watherJson = req;
           }
         };
         reqUrl = createRecUrl(elements);
@@ -62,6 +62,11 @@
         req.setRequestHeader("X-POTEKA-Authorization", authtext);
         req.send(null);
       }
+
+      function checkwatherJson(){
+        alert(watherJson.text);
+      };
+
 
       // apiURLを生成
       function createRecUrl(el){
@@ -158,6 +163,9 @@
                 <option value="6">矩形指定データ（forecast）</option>
               </select>
               <button onclick="getWatherJSON();">天気データを取得して表示</button>
+            </div>
+            <div>
+              <button onclick="checkwatherJson();">JSONの中身を表示</button>
             </div>
             <div>
               <textarea id="dispArea" class="textarea" rows="50" cols="50"></textarea>
