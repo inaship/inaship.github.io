@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT24-APP - Index</title>
+    <title>SGT25-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -53,9 +53,10 @@
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
           if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
-            watherJson = JSON.parse(req.responseText);
+            var resText = req.responseText;
+            $('#dispArea').val(resText);
+            watherJson = JSON.parse(resText);
             console.log("watherJson = " + watherJson);
-            $('#dispArea').val(JSON.stringify(watherJson));
           }
         };
         reqUrl = createRecUrl(elements);
