@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT6-APP - Index</title>
+    <title>SGT7-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -50,6 +50,7 @@
 
       // 天気情報読み込みテスト
       function getWatherJSON() {
+        getCheckElements();
         $('#dispArea').val();
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
@@ -58,14 +59,14 @@
           }
         };
 
-        //var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&" + apParam["nePoint"] + "&element=" + $("#selectedElement").val(); // 'Access-Control-Allow-Origin'で取得できない
-        var reqUrl = apiDomain + "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + $("#selectedElement").val();  // 取得できる
-        //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + $("#selectedElement").val(); // 取得できる
-        //var reqUrl = apiDomain + "/v1/point/real/ja/poteka?potekaId=235&element=" + $("#selectedElement").val();  // 取得できる
-        //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=42302&element=" + $("#selectedElement").val();  // 取得できる
+        //var reqUrl = apiDomain + "/v1/area/real/rectangle?swPoint=" + apParam["swPoint"] + "&" + apParam["nePoint"] + "&element=" + elements; // 'Access-Control-Allow-Origin'で取得できない
+        var reqUrl = apiDomain + "/v1/area/real/ja/city?jisCode=" + apParam["jisCode_city"] + "&element=" + elements;  // 取得できる
+        //var reqUrl = apiDomain + "/v1/area/real/ja/prefecture?jisCode=09,10&element=" + elements; // 取得できる
+        //var reqUrl = apiDomain + "/v1/point/real/ja/poteka?potekaId=235&element=" + elements;  // 取得できる
+        //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=42302&element=" + elements;  // 取得できる
         //var reqUrl = apiDomain + "/v1/point/real/ja/radar?zoomLevel=10&x=429&y=218&datetime=2015-11-26T19:30:00+00:00" ; // 400 (Bad Request)で取得できない
-        //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=42302&element=" + $("#selectedElement").val(); // 取得できる
-        //var reqUrl = apiDomain + "/v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" + $("#selectedElement").val(); // 'Access-Control-Allow-Origin'で取得できない
+        //var reqUrl = apiDomain + "/v1/point/real/ja/amedas?amedasId=42302&element=" + elements; // 取得できる
+        //var reqUrl = apiDomain + "/v1/area/forecast/rectangle?swPoint=36.1769,138.9866&nePoint=36.4369,139.4398&element=" + elements; // 'Access-Control-Allow-Origin'で取得できない
 
         /*
         var reqUrl = apiDomain
@@ -80,42 +81,6 @@
         req.send(null);
       }
 
-      // 取得する情報を選択するセレクトボックスを生成
-      function setSelectedElement() {
-        var elementValue = {
-          temp: "気温",
-          humi: "湿度",
-          press_l: "現地気圧",
-          press_s: "海面気圧",
-          wind_d: "風向",
-          wind_s: "風速",
-          solar: "日射",
-          rain: "雨感",
-          rain_f: "1時間雨量",
-          rain_i: "降水強度",
-          rain_c: "連続雨量",
-          rain_e: "実効雨量",
-          wbgt: "暑さ指数",
-          weather: "天気"
-        },
-        $select = $('#selectedElement'),
-        $option,
-        options,
-        isSelected;
-        // コールバック関数の引数の順序が $.each と異なることに注意。
-        options = $.map(elementValue, function (name, value) {
-          isSelected = (value === 'temp');
-          $option = $('<option>', { value: value, text: name, selected: isSelected });
-          return $option;
-        });
-        $select.append(options);
-      }
-
-      // パラメーターチェック
-      function checkParam() {
-        $('#dispParam').val(apParam["swPoint"].text);
-      }
-
       // チェックしたエレメントを取得
       var elements;
       function getCheckElements() {
@@ -123,8 +88,9 @@
           return $(this).val()
         }).get().join(',');
         console.log(elements);
-        opElements();
+        //opElements();
       }
+
       function opElements(){
         alert(elements);
       }
