@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT16-APP - Index</title>
+    <title>SGT17-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -43,7 +43,6 @@
       // 天気情報読み込みテスト
       function getWatherJSON() {
         var elements = getCheckElements();
-        $('#dispArea').val();
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
           if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
@@ -96,7 +95,7 @@
       <div id="container">
         <div>SGT</div>
         <div>
-          <form name="sgtLiveWather">
+
             <div>
               <input type="checkbox" name="elementType" class="elements" value="temp" checked="checked">&nbsp;気温
               <input type="checkbox" name="elementType" class="elements" value="humi">&nbsp;湿度
@@ -127,7 +126,7 @@
             <div>
               <textarea id="dispArea" rows="50" cols="50"></textarea>
             </div>
-          </form>
+
         </div>
       </div>
       <footer>
