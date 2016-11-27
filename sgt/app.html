@@ -10,7 +10,7 @@
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT9-APP - Index</title>
+    <title>SGT10-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -61,6 +61,7 @@
       function createRecUrl(){
         var retVal;
         var s = $("#targetAPI").val();
+        console.log(s);
         var tgApi;
         switch(s){
           case 0 : tgApi = "/v1/area/real/ja/prefecture?jisCode=" + apParam["jisCode_pref"] + "&element=" + elements; break;
