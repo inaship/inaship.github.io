@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT25-APP - Index</title>
+    <title>SGT26-APP - Index</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -57,6 +57,7 @@
             $('#dispArea').val(resText);
             watherJson = JSON.parse(resText);
             console.log("watherJson = " + watherJson);
+            outputJson();
           }
         };
         reqUrl = createRecUrl(elements);
@@ -65,6 +66,15 @@
         req.send(null);
       }
 
+      function outputJson(){
+        var
+          ulObj = $("#dispDiv"),
+          len = watherJson.length;
+
+        for(var i = 0; i < len; i++) {
+          ulObj.append($("<li>").attr({"id":watherJson[i].id}).text(watherJson[i].name));
+        }
+      }
 
       // apiURLを生成
       function createRecUrl(el){
@@ -163,9 +173,9 @@
               <button onclick="getWatherJSON();">天気データを取得して表示</button>
             </div>
             <div>
-              <textarea id="dispArea" class="textarea" rows="50" cols="50"></textarea>
+              <textarea id="dispArea" class="textarea" rows="30" cols="50"></textarea>
             </div>
-
+            <ol id="dispDiv"></ol>
         </div>
       </div>
       <footer>
