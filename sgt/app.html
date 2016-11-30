@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="author" content="inaship">
     <meta name="copyright" content="inaship">
-    <meta name="description" content="個人的なテストの場">
+    <meta name="description" content="CIRCUIT LIVE WEATHER">
     <meta name="keywords" content="">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
@@ -13,14 +14,17 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>SGT40 - Index</title>
+    <title>06 CIRCUIT LIVE WEATHER</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script type="text/javascript">
+      // 各種変数
       var sgtLW;  // 設定用変数
       var apiDomain;
       var authtext;
+      var watherJson;
+
       // 外部ファイル読み込み
       function loadSetting(){
         $.ajaxSetup({async: false});
@@ -32,22 +36,26 @@
         $.ajaxSetup({async: true});
       }
 
-      var apParam = {
-        //swPoint: "35.3682,138.9374",
-        //nePoint: "35.3679,138.9191",
+      // 初期値
+      var defParam = {
         swPoint: "36.1769,138.9866",
         nePoint: "36.4369,139.4398",
         jisCode_city: "10204",
         jisCode_pref: "09,10",
         potekaId: "235",
+        poteka: true,
         amedasId: "42302",
-        zoomLevel: "10",
-        x: "429",
-        y: "218",
+        amedas: true,
+        zoomLevel: 12,
+        interval: 1,
+        dataPeriod: 0,
+        rader: true,
+        x: 429,
+        y: 218,
+        startDate: "",
+        endtDate: "latest",
         datetime: "2016-11-27T16:00:00+00:00"
       };
-
-      var watherJson;
 
       // 天気情報読み込み
       function getWatherJSON() {
@@ -59,6 +67,9 @@
             $('#dispArea').val(resText);
             watherJson = JSON.parse(resText);
             console.log("watherJson = " + JSON.stringify(watherJson));
+          } else {
+            var resText = req.statusText;
+            $('#dispArea').val(resText);
           }
         };
         reqUrl = createRecUrl(elements);
@@ -77,39 +88,72 @@
         switch(s){
           case 0 : tgApi = "/v1/area/real/ja/prefecture"
                          + "?jisCode=" + $("#inJisCode_pref").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
                          + "&element=" + el;
             break;
           case 1 : tgApi = "/v1/area/real/ja/city"
                          + "?jisCode=" + $("#inJisCode_city").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
                          + "&element=" + el;
             break;
           case 2 : tgApi = "/v1/point/real/ja/poteka"
-                         + "?potekaId=" + apParam["potekaId"]
+                         + "?potekaId=" + $("#inPotekaId").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
                          + "&element=" + el;
             break;
           case 3 : tgApi = "/v1/point/real/ja/amedas"
-                         + "?amedasId=" + apParam["amedasId"]
+                         + "?amedasId=" + $("#inAmedasId").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
                          + "&element=" + el;
             break;
           case 4 : tgApi = "/v1/area/real/rectangle"
-                         + "?swPoint=" + $("#inpSwPoint").val()
-                         + "&nePoint=" + $("#inpNePoint").val()
+                         + "?swPoint=" + $("#inSwPoint").val()
+                         + "&nePoint=" + $("#inNePoint").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
                          + "&element=" + el;
             break;
           case 5 : tgApi = "/v1/point/real/ja/radar"
-                         + "?zoomLevel=" + apParam["zoomLevel"]
-                         + "&x=" + apParam["x"]
-                         + "&y=" + apParam["y"]
+                         + "?zoomLevel=" + $("#inZoomLevel").val()
+                         + "&x=" + $("#inX").val()
+                         + "&y=" + $("#inY").val()
                          + "&datetime=" + getTimeStamp();
-                         //+ "&datetime=" + apParam["datetime"];
             break;
           case 6 : tgApi = "/v1/area/forecast/rectangle"
-                         + "?swPoint=" + $("#inpSwPoint").val()
-                         + "&nePoint=" + $("#inpNePoint").val()
+                         + "?swPoint=" + $("#inSwPoint").val()
+                         + "&nePoint=" + $("#inNePoint").val()
+                         + "&dataPeriod=" + $("#inDataPeriod").val()
+                         + "&interval=" + $("#inInterval").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
                          + "&element=" + el;
             break;
           default: tgApi = "/v1/area/real/ja/prefecture"
                          + "?jisCode=" + $("#inJisCode_pref").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndtDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
                          + "&element=" + el;
         }
         retVal = apiDomain + tgApi;
@@ -156,13 +200,24 @@
       // イニシャライズ
       $(function () {
         loadSetting();
-        $("#inpSwPoint").val(apParam["swPoint"]);
-        $("#inpNePoint").val(apParam["nePoint"]);
-        $("#inJisCode_city").val(apParam["jisCode_city"]);
-        $("#inJisCode_pref").val(apParam["jisCode_pref"]);
-        $("#inPotekaId").val(apParam["potekaId"]);
-        $("#inAmedasId").val(apParam["amedasId"]);
-
+        $("#inSwPoint").val(defParam["swPoint"]);
+        $("#inNePoint").val(defParam["nePoint"]);
+        $("#inJisCode_city").val(defParam["jisCode_city"]);
+        $("#inJisCode_pref").val(defParam["jisCode_pref"]);
+        $("#inX").val(defParam["x"]);
+        $("#inY").val(defParam["y"]);
+        $("#inPotekaId").val(defParam["potekaId"]);
+        $("#inAmedasId").val(defParam["amedasId"]);
+        //$("#inStartDate").val(getTimeStamp());
+        $("#inEndtDate").val(defParam["endtDate"]);
+        /*
+        $("#inPoteka").val(defParam["poteka"]);
+        $("#inPotekaId").val(defParam["potekaId"]);
+        $("#inAmedas").val(defParam["amedas"]);
+        $("#inAmedasId").val(defParam["amedasId"]);
+        $("#inZoomLevel").val(defParam["zoomLevel"]);
+        $("#ininInterval").val(defParam["interval"]);
+        */
       });
     </script>
   </head>
@@ -188,26 +243,113 @@
               <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
             </div>
             <div>
-              <label name="inSwPoint">swPiont：
-              <input type="text" id="inpSwPoint" name="inSwPoint" value="" />
-              <label name="inNePoint">nePiont：
-              <input type="text" id="inpNePoint" name="inNePoint" value="" />
+              <label name="inSwPoint">南西端緯度経度：
+              <input type="text" id="inSwPoint" name="inSwPoint" value="" />
+              <label name="inNePoint">北東端緯度経度：
+              <input type="text" id="inNePoint" name="inNePoint" value="" />
             </div>
             <div>
-                <label name="inJisCode_city">JisCode_city：
-                <input type="text" id="inJisCode_city" name="inJisCode_city" value="" />
-                <label name="inJisCode_pref">JisCode_pref：
+                <label name="inJisCode_pref">都道府県コード：
                 <input type="text" id="inJisCode_pref" name="inJisCode_pref" value="" />
+                <label name="inJisCode_city">市町村コード：
+                <input type="text" id="inJisCode_city" name="inJisCode_city" value="" />
             </div>
             <div>
-                <label name="inPotekaId">PotekaID：
+                <label name="inPoteka">POTEKAデータ有無：
+                <select name="inPoteka" id="inPoteka">
+                  <option value="true" selected="selected">取得する</option>
+                  <option value="false">取得しない</option>
+                </select>
+                <label name="inPotekaId">POTEKA ID：
                 <input type="text" id="inPotekaId" name="inPotekaId" value="" />
-                <label name="inAmedasId">AmedasID：
+            </div>
+            <div>
+                <label name="inAmedas">アメダスデータ有無：
+                <select name="inAmedas" id="inAmedas">
+                  <option value="true" selected="selected">取得する</option>
+                  <option value="false">取得しない</option>
+                </select>
+                <label name="inAmedasId">アメダス ID：
                 <input type="text" id="inAmedasId" name="inAmedasId" value="" />
             </div>
             <div>
-                <label name="inPotekaId">PotekaID：
-                <input type="text" id="inPotekaId" name="inPotekaId" value="" />
+                <label name="inZoomLevel">ズームレベル：
+                <select name="inZoomLevel" id="inZoomLevel">
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                <label name="inInterval">データ間隔：
+                <select name="inInterval" id="inInterval">
+                  <option value="1">1</option>
+                  <option value="3">3</option>
+                  <option value="6">6</option>
+                </select>
+            </div>
+            <div>
+                <label name="inDataPeriod">予報収集時間：
+                <select name="inDataPeriod" id="inDataPeriod">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                  <option value="32">32</option>
+                  <option value="33">33</option>
+                  <option value="34">34</option>
+                  <option value="35">35</option>
+                  <option value="36">36</option>
+                </select>
+            </div>
+            <div>
+                <label name="inRader">雨雲レーダー画像有無：
+                <select name="inRader" id="inRader">
+                  <option value="true">取得する</option>
+                  <option value="false" selected="selected">取得しない</option>
+                </select>
+            </div>
+            <div>
+              <label name="inX">Xタイル番号：
+              <input type="text" id="inX" name="inX" value="" />
+              <label name="inY">Yタイル番号：
+              <input type="text" id="inY" name="inY" value="" />
+            </div>
+            <div>
+              <label name="inStartDate">取得開始日時：
+              <input type="text" id="inStartDate" name="inStartDate" value="" />
+              <label name="inEndDate">取得終了日時：
+              <input type="text" id="inEndDate" name="inEndDate" value="latest" />
             </div>
             <div>
               <select id="targetAPI">
