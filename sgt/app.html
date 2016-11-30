@@ -92,8 +92,8 @@
                          + "&element=" + el;
             break;
           case 4 : tgApi = "/v1/area/real/rectangle"
-                         + "?swPoint=" + apParam["swPoint"]
-                         + "&nePoint=" + apParam["nePoint"]
+                         + "?swPoint=" + $("#inpSwPoint").val()
+                         + "&nePoint=" + $("#inpNePoint").val()
                          + "&element=" + el;
             break;
           case 5 : tgApi = "/v1/point/real/ja/radar"
@@ -104,8 +104,8 @@
                          //+ "&datetime=" + apParam["datetime"];
             break;
           case 6 : tgApi = "/v1/area/forecast/rectangle"
-                         + "?swPoint=" + apParam["swPoint"]
-                         + "&nePoint=" + apParam["nePoint"]
+                         + "?swPoint=" + $("#inpSwPoint").val()
+                         + "&nePoint=" + $("#inpNePoint").val()
                          + "&element=" + el;
             break;
           default: tgApi = "/v1/area/real/ja/prefecture"
@@ -156,6 +156,8 @@
       // イニシャライズ
       $(function () {
         loadSetting();
+        $("#inpSwPoint").val(apParam["swPoint"]);
+        $("#inpNePoint").val(apParam["nePoint"]);
       });
     </script>
   </head>
@@ -179,6 +181,12 @@
               <input type="checkbox" name="elementType" class="elements" value="rain_c">&nbsp;連続雨量
               <input type="checkbox" name="elementType" class="elements" value="wbgt">&nbsp;暑さ指数
               <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
+            </div>
+            <div>
+              <label name="inSwPoint">swPiont
+              <input type="text" id="inpSwPoint" name="inSwPoint" value="" />
+              <label name="inNePoint">nePiont
+              <input type="text" id="inpNePoint" name="inNePoint" value="" />
             </div>
             <div>
               <select id="targetAPI">
