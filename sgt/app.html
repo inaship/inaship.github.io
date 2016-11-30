@@ -76,11 +76,11 @@
         var tgApi;
         switch(s){
           case 0 : tgApi = "/v1/area/real/ja/prefecture"
-                         + "?jisCode=" + apParam["jisCode_pref"]
+                         + "?jisCode=" + $("#inJisCode_pref").val()
                          + "&element=" + el;
             break;
           case 1 : tgApi = "/v1/area/real/ja/city"
-                         + "?jisCode=" + apParam["jisCode_city"]
+                         + "?jisCode=" + $("#inJisCode_city").val()
                          + "&element=" + el;
             break;
           case 2 : tgApi = "/v1/point/real/ja/poteka"
@@ -109,7 +109,7 @@
                          + "&element=" + el;
             break;
           default: tgApi = "/v1/area/real/ja/prefecture"
-                         + "?jisCode=" + apParam["jisCode_pref"]
+                         + "?jisCode=" + $("#inJisCode_pref").val()
                          + "&element=" + el;
         }
         retVal = apiDomain + tgApi;
@@ -158,6 +158,9 @@
         loadSetting();
         $("#inpSwPoint").val(apParam["swPoint"]);
         $("#inpNePoint").val(apParam["nePoint"]);
+        $("#inJisCode_city").val(apParam["jisCode_city"]);
+        $("#inJisCode_pref").val(apParam["jisCode_pref"]);
+
       });
     </script>
   </head>
@@ -183,10 +186,16 @@
               <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
             </div>
             <div>
-              <label name="inSwPoint">swPiont
+              <label name="inSwPoint">swPiont：
               <input type="text" id="inpSwPoint" name="inSwPoint" value="" />
-              <label name="inNePoint">nePiont
+              <label name="inNePoint">nePiont：
               <input type="text" id="inpNePoint" name="inNePoint" value="" />
+            </div>
+            <div>
+                <label name="inJisCode_city">JisCode_city：
+                <input type="text" id="inJisCode_city" name="inJisCode_city" value="" />
+                <label name="inJisCode_pref">JisCode_pref：
+                <input type="text" id="inJisCode_pref" name="inJisCode_pref" value="" />
             </div>
             <div>
               <select id="targetAPI">
