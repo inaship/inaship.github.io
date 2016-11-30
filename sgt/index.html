@@ -12,7 +12,7 @@
     <meta name=”robots” content=”noindex,follow” />
     <!--<base href="http://inaship.github.com/">-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <title>06 CIRCUIT LIVE WEATHER</title>
     <!--[if lt IE 9]>
@@ -222,151 +222,185 @@
     </script>
   </head>
   <body>
-    <div id="wapper">
-      <div id="container">
-        <div>SGT</div>
-        <div>
-
-            <div>
-              <input type="checkbox" name="elementType" class="elements" value="temp" checked="checked">&nbsp;気温
-              <input type="checkbox" name="elementType" class="elements" value="humi">&nbsp;湿度
-              <input type="checkbox" name="elementType" class="elements" value="press_l">&nbsp;現地気圧
-              <input type="checkbox" name="elementType" class="elements" value="press_s">&nbsp;海面気圧
-              <input type="checkbox" name="elementType" class="elements" value="wind_d">&nbsp;風向
-              <input type="checkbox" name="elementType" class="elements" value="solar">&nbsp;日射
-              <br />
-              <input type="checkbox" name="elementType" class="elements" value="rain">&nbsp;雨感
-              <input type="checkbox" name="elementType" class="elements" value="rain_f">&nbsp;1時間雨量
-              <input type="checkbox" name="elementType" class="elements" value="rain_i">&nbsp;降水強度
-              <input type="checkbox" name="elementType" class="elements" value="rain_c">&nbsp;連続雨量
-              <input type="checkbox" name="elementType" class="elements" value="wbgt">&nbsp;暑さ指数
-              <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
-            </div>
-            <div>
-              <label name="inSwPoint">南西端緯度経度：
-              <input type="text" id="inSwPoint" name="inSwPoint" value="" />
-              <label name="inNePoint">北東端緯度経度：
-              <input type="text" id="inNePoint" name="inNePoint" value="" />
-            </div>
-            <div>
-                <label name="inJisCode_pref">都道府県コード：
-                <input type="text" id="inJisCode_pref" name="inJisCode_pref" value="" />
-                <label name="inJisCode_city">市町村コード：
-                <input type="text" id="inJisCode_city" name="inJisCode_city" value="" />
-            </div>
-            <div>
-                <label name="inPoteka">POTEKAデータ有無：
-                <select name="inPoteka" id="inPoteka">
-                  <option value="true" selected="selected">取得する</option>
-                  <option value="false">取得しない</option>
-                </select>
-                <label name="inPotekaId">POTEKA ID：
-                <input type="text" id="inPotekaId" name="inPotekaId" value="" />
-            </div>
-            <div>
-                <label name="inAmedas">アメダスデータ有無：
-                <select name="inAmedas" id="inAmedas">
-                  <option value="true" selected="selected">取得する</option>
-                  <option value="false">取得しない</option>
-                </select>
-                <label name="inAmedasId">アメダス ID：
-                <input type="text" id="inAmedasId" name="inAmedasId" value="" />
-            </div>
-            <div>
-                <label name="inZoomLevel">ズームレベル：
-                <select name="inZoomLevel" id="inZoomLevel">
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-                <label name="inInterval">データ間隔：
-                <select name="inInterval" id="inInterval">
-                  <option value="1">1</option>
-                  <option value="3">3</option>
-                  <option value="6">6</option>
-                </select>
-            </div>
-            <div>
-                <label name="inDataPeriod">予報収集時間：
-                <select name="inDataPeriod" id="inDataPeriod">
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                  <option value="16">16</option>
-                  <option value="17">17</option>
-                  <option value="18">18</option>
-                  <option value="19">19</option>
-                  <option value="20">20</option>
-                  <option value="21">21</option>
-                  <option value="22">22</option>
-                  <option value="23">23</option>
-                  <option value="24">24</option>
-                  <option value="25">25</option>
-                  <option value="26">26</option>
-                  <option value="27">27</option>
-                  <option value="28">28</option>
-                  <option value="29">29</option>
-                  <option value="30">30</option>
-                  <option value="31">31</option>
-                  <option value="32">32</option>
-                  <option value="33">33</option>
-                  <option value="34">34</option>
-                  <option value="35">35</option>
-                  <option value="36">36</option>
-                </select>
-            </div>
-            <div>
-                <label name="inRader">雨雲レーダー画像有無：
-                <select name="inRader" id="inRader">
-                  <option value="true">取得する</option>
-                  <option value="false" selected="selected">取得しない</option>
-                </select>
-            </div>
-            <div>
-              <label name="inX">Xタイル番号：
-              <input type="text" id="inX" name="inX" value="" />
-              <label name="inY">Yタイル番号：
-              <input type="text" id="inY" name="inY" value="" />
-            </div>
-            <div>
-              <label name="inStartDate">取得開始日時：
-              <input type="text" id="inStartDate" name="inStartDate" value="" />
-              <label name="inEndDate">取得終了日時：
-              <input type="text" id="inEndDate" name="inEndDate" value="latest" />
-            </div>
-            <div>
-              <select id="targetAPI">
-                <option value="0" selected="selected">都道府県指定データ</option>
-                <option value="1">市町村指定データ</option>
-                <option value="2">POTEKA指定データ</option>
-                <option value="3">アメダス指定データ</option>
-                <option value="4">矩形指定データ（real）</option>
-                <option value="5">雨雲レーダー指定データ</option>
-                <option value="6">矩形指定データ（forecast）</option>
+    <div class="container" id="container">
+      <div class="row">
+        <div class="col s12">SGT</div>
+      </div>
+      <div class="row">
+          <div class="col s12">
+            <input type="checkbox" name="elementType" class="elements" value="temp" checked="checked">&nbsp;気温
+            <input type="checkbox" name="elementType" class="elements" value="humi">&nbsp;湿度
+            <input type="checkbox" name="elementType" class="elements" value="press_l">&nbsp;現地気圧
+            <input type="checkbox" name="elementType" class="elements" value="press_s">&nbsp;海面気圧
+            <input type="checkbox" name="elementType" class="elements" value="wind_d">&nbsp;風向
+            <input type="checkbox" name="elementType" class="elements" value="solar">&nbsp;日射
+            <input type="checkbox" name="elementType" class="elements" value="rain">&nbsp;雨感
+            <input type="checkbox" name="elementType" class="elements" value="rain_f">&nbsp;1時間雨量
+            <input type="checkbox" name="elementType" class="elements" value="rain_i">&nbsp;降水強度
+            <input type="checkbox" name="elementType" class="elements" value="rain_c">&nbsp;連続雨量
+            <input type="checkbox" name="elementType" class="elements" value="wbgt">&nbsp;暑さ指数
+            <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s6">
+            <label name="inSwPoint">南西端緯度経度：
+            <input type="text" id="inSwPoint" name="inSwPoint" value="" />
+          </div>
+          <div class="col s6">
+            <label name="inNePoint">北東端緯度経度：
+            <input type="text" id="inNePoint" name="inNePoint" value="" />
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s6">
+              <label name="inJisCode_pref">都道府県コード：
+              <input type="text" id="inJisCode_pref" name="inJisCode_pref" value="" />
+          </div>
+          <div class="col s6">
+              <label name="inJisCode_city">市町村コード：
+              <input type="text" id="inJisCode_city" name="inJisCode_city" value="" />
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s6">
+              <label name="inPoteka">POTEKAデータ有無：
+              <select name="inPoteka" id="inPoteka">
+                <option value="true" selected="selected">取得する</option>
+                <option value="false">取得しない</option>
               </select>
-              <button onclick="getWatherJSON();">天気データを取得して表示</button>
-            </div>
-            <div>
-              <textarea id="dispArea" class="textarea" rows="20" cols="50"></textarea>
-            </div>
-        </div>
+          </div>
+          <div class="col s6">
+              <label name="inPotekaId">POTEKA ID：
+              <input type="text" id="inPotekaId" name="inPotekaId" value="" />
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s6">
+              <label name="inAmedas">アメダスデータ有無：
+              <select name="inAmedas" id="inAmedas">
+                <option value="true" selected="selected">取得する</option>
+                <option value="false">取得しない</option>
+              </select>
+          </div>
+          <div class="col s6">
+              <label name="inAmedasId">アメダス ID：
+              <input type="text" id="inAmedasId" name="inAmedasId" value="" />
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s6">
+              <label name="inZoomLevel">ズームレベル：
+              <select name="inZoomLevel" id="inZoomLevel">
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+          </div>
+          <div class="col s6">
+              <label name="inInterval">データ間隔：
+              <select name="inInterval" id="inInterval">
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="6">6</option>
+              </select>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12">
+              <label name="inDataPeriod">予報収集時間：
+              <select name="inDataPeriod" id="inDataPeriod">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+              </select>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12">
+              <label name="inRader">雨雲レーダー画像有無：
+              <select name="inRader" id="inRader">
+                <option value="true">取得する</option>
+                <option value="false" selected="selected">取得しない</option>
+              </select>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s6">
+            <label name="inX">Xタイル番号：
+            <input type="text" id="inX" name="inX" value="" />
+          </div>
+          <div class="col s6">
+            <label name="inY">Yタイル番号：
+            <input type="text" id="inY" name="inY" value="" />
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s6">
+            <label name="inStartDate">取得開始日時：
+            <input type="text" id="inStartDate" name="inStartDate" value="" />
+          </div>
+          <div class="col s6">
+            <label name="inEndDate">取得終了日時：
+            <input type="text" id="inEndDate" name="inEndDate" value="latest" />
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12">
+            <select id="targetAPI">
+              <option value="0" selected="selected">都道府県指定データ</option>
+              <option value="1">市町村指定データ</option>
+              <option value="2">POTEKA指定データ</option>
+              <option value="3">アメダス指定データ</option>
+              <option value="4">矩形指定データ（real）</option>
+              <option value="5">雨雲レーダー指定データ</option>
+              <option value="6">矩形指定データ（forecast）</option>
+            </select>
+            <button onclick="getWatherJSON();">天気データを取得して表示</button>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12">
+            <textarea id="dispArea" class="textarea" rows="20" cols="50"></textarea>
+          </div>
       </div>
       <footer>
         <p>&nbsp;</p>
