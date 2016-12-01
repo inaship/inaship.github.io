@@ -14,7 +14,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <title>12 CIRCUIT LIVE WEATHER</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>13 CIRCUIT LIVE WEATHER</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -245,8 +246,8 @@
               <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l" />
               <label for="inPress_l">現地気圧</lable>
             </p>
-          <div class="input-field col s3">
           </div>
+          <div class="input-field col s3">
             <p>
               <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s" />
               <label for="">海面気圧</lable>
@@ -273,8 +274,8 @@
               <input type="checkbox" name="elementType" class="elements" id="inRain_i" value="rain_i" />
               <label for="inRain_i">降水強度</lable>
             </p>
-          <div class="input-field col s3">
           </div>
+          <div class="input-field col s3">
             <p>
               <input type="checkbox" name="elementType" class="elements" id="inRain_c" value="rain_c" />
               <label for="inRain_c">連続雨量</lable>
@@ -311,11 +312,11 @@
       </div>
       <div class="row">
           <div class="input-field col s6">
-              <label>POTEKAデータ有無：</label>
               <select id="inPoteka">
                 <option value="true" selected="selected">取得する</option>
                 <option value="false">取得しない</option>
               </select>
+              <label>POTEKAデータ有無：</label>
           </div>
           <div class="input-field col s6">
               <input type="text" id="inPotekaId" name="" value="" />
@@ -324,11 +325,11 @@
       </div>
       <div class="row">
           <div class="input-field col s6">
-              <label>アメダスデータ有無：</label>
               <select name="" id="inAmedas">
                 <option value="true" selected="selected">取得する</option>
                 <option value="false">取得しない</option>
               </select>
+              <label>アメダスデータ有無：</label>
           </div>
           <div class="input-field col s6">
               <input type="text" id="inAmedasId" name="" value="" />
@@ -337,7 +338,6 @@
       </div>
       <div class="row">
           <div class="input-field col s6">
-              <label>ズームレベル：</label>
               <select name="" id="inZoomLevel">
                 <option value="4">4</option>
                 <option value="5">5</option>
@@ -347,19 +347,19 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
               </select>
+              <label>ズームレベル：</label>
           </div>
           <div class="input-field col s6">
-              <label>データ間隔：</label>
               <select name="" id="inInterval">
                 <option value="1">1</option>
                 <option value="3">3</option>
                 <option value="6">6</option>
               </select>
+              <label>データ間隔：</label>
           </div>
       </div>
       <div class="row">
           <div class="input-field col s12">
-              <label>予報収集時間：</label>
               <select name="" id="inDataPeriod">
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -399,15 +399,16 @@
                 <option value="35">35</option>
                 <option value="36">36</option>
               </select>
+              <label>予報収集時間：</label>
           </div>
       </div>
       <div class="row">
           <div class="input-field col s12">
-              <label>雨雲レーダー画像有無：</label>
               <select name="" id="inRader">
                 <option value="true">取得する</option>
                 <option value="false" selected="selected">取得しない</option>
               </select>
+              <label>雨雲レーダー画像有無：</label>
           </div>
       </div>
       <div class="row">
@@ -431,7 +432,7 @@
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s6">
             <select id="targetAPI">
               <option value="0" selected="selected">都道府県指定データ</option>
               <option value="1">市町村指定データ</option>
@@ -441,7 +442,10 @@
               <option value="5">雨雲レーダー指定データ</option>
               <option value="6">矩形指定データ（forecast）</option>
             </select>
-            <button onclick="getWatherJSON();">天気データを取得して表示</button>
+            <lable>ターゲットAPI</label>
+          </div>
+          <div class="input-field col s6">
+            <a class="waves-effect waves-light btn-large" onclick="getWatherJSON();"><i class="material-icons left">cloud</i>天気データを取得して表示</a>
           </div>
       </div>
       <div class="row">
