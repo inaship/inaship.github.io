@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="inaship">
     <meta name="copyright" content="inaship">
-    <meta name="description" content="CIRCUIT LIVE WEATHER">
+    <meta name="description" content="SGT CIRCUIT LIVE WEATHER">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta name=”robots” content=”noindex,follow” />
@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>29 CIRCUIT LIVE WEATHER</title>
+    <title>30 CIRCUIT LIVE WEATHER</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -237,6 +237,10 @@
         <div class="row">
           <div class="input-field col s6 l3">
             <p>
+              <input type="checkbox" name="elementType" class="elements" id="inWater" value="weather" checked="checked" />
+              <label for="inWater">天気</label>
+            </p>
+            <p>
               <input type="checkbox" name="elementType" class="elements" id="inTemp" value="temp" checked="checked" />
               <label for="inTemp">気温</label>
             </p>
@@ -245,22 +249,26 @@
               <label for="inHumi">湿度</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l" />
-              <label for="inPress_l">現地気圧</label>
+              <input type="checkbox" name="elementType" class="elements" id="inSolar" value="solar" />
+              <label for="inSolar">日射</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
-            <p>
-              <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s" />
-              <label for="">海面気圧</label>
-            </p>
             <p>
               <input type="checkbox" name="elementType" class="elements" id="inWind_d" value="wind_d" />
               <label for="inWind_d">風向</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inSolar" value="solar" />
-              <label for="inSolar">日射</label>
+              <input type="checkbox" name="elementType" class="elements" id="inWind_s" value="wind_s" />
+              <label for="inWind_s">風速</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l" />
+              <label for="inPress_l">現地気圧</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s" />
+              <label for="">海面気圧</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
@@ -276,19 +284,19 @@
               <input type="checkbox" name="elementType" class="elements" id="inRain_i" value="rain_i" />
               <label for="inRain_i">降水強度</label>
             </p>
-          </div>
-          <div class="input-field col s6 l3">
             <p>
               <input type="checkbox" name="elementType" class="elements" id="inRain_c" value="rain_c" />
               <label for="inRain_c">連続雨量</label>
             </p>
+          </div>
+          <div class="input-field col s6 l3">
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inRain_e" value="rain_e" />
+              <label for="inRain_e">実効雨量</label>
+            </p>
             <p>
               <input type="checkbox" name="elementType" class="elements" id="inWbgt" value="wbgt" />
               <label for="inWbgt">暑さ指数</label>
-            </p>
-            <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWater" value="weather" />
-              <label for="inWater">天気</label>
             </p>
           </div>
         </div>
