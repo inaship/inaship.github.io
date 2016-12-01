@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>16 CIRCUIT LIVE WEATHER</title>
+    <title>17 CIRCUIT LIVE WEATHER</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -302,43 +302,43 @@
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <input type="text" id="inJisCode_pref" name="" value="" />
               <label for="inJisCode_pref">都道府県コード：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <input type="text" id="inJisCode_city" name="" value="" />
               <label for="inJisCode_city">市町村コード：</label>
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <select id="inPoteka">
                 <option value="true" selected="selected">取得する</option>
                 <option value="false">取得しない</option>
               </select>
               <label>POTEKAデータ有無：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <input type="text" id="inPotekaId" name="" value="" />
               <label for="inPotekaId">POTEKA ID：</label>
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <select name="" id="inAmedas">
                 <option value="true" selected="selected">取得する</option>
                 <option value="false">取得しない</option>
               </select>
               <label>アメダスデータ有無：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <input type="text" id="inAmedasId" name="" value="" />
               <label for="inAmedasId">アメダス ID：</label>
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <select name="" id="inZoomLevel">
                 <option value="4">4</option>
                 <option value="5">5</option>
@@ -350,7 +350,7 @@
               </select>
               <label>ズームレベル：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <select name="" id="inInterval">
                 <option value="1">1</option>
                 <option value="3">3</option>
@@ -360,7 +360,7 @@
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <select name="" id="inDataPeriod">
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -402,7 +402,7 @@
               </select>
               <label>予報収集時間：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
               <select name="" id="inRader">
                 <option value="true">取得する</option>
                 <option value="false" selected="selected">取得しない</option>
@@ -411,27 +411,27 @@
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
             <input type="text" id="inX" name="" value="" />
             <label for="inX">Xタイル番号：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
             <input type="text" id="inY" name="" value="" />
             <label for="inY">Yタイル番号：</label>
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
             <input type="text" id="inStartDate" name="" value="" />
             <label for="inStartDate">取得開始日時：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
             <input type="text" id="inEndDate" name="" value="latest" />
             <label for="inEndDate">取得終了日時：</label>
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
             <select id="targetAPI">
               <option value="0" selected="selected">都道府県指定データ</option>
               <option value="1">市町村指定データ</option>
@@ -443,12 +443,12 @@
             </select>
             <label>ターゲットAPI：</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12 l6">
             <a class="waves-effect waves-light btn-large" onclick="getWatherJSON();"><i class="material-icons left">wb_sunny</i>天気データを取得して表示</a>
           </div>
       </div>
       <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s12 l12">
             <textarea id="dispArea" class="materialize-textarea"></textarea>
             <label for="dispArea">取得したJSON</label>
           </div>
