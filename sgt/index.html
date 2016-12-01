@@ -229,20 +229,33 @@
             <h2>SGT</h2>
          </div>
       </div>
+    <form action="#">
       <div class="row">
           <div class="input-field col s12">
-            <input type="checkbox" name="elementType" class="elements" value="temp" checked="checked">&nbsp;気温
-            <input type="checkbox" name="elementType" class="elements" value="humi">&nbsp;湿度
-            <input type="checkbox" name="elementType" class="elements" value="press_l">&nbsp;現地気圧
-            <input type="checkbox" name="elementType" class="elements" value="press_s">&nbsp;海面気圧
-            <input type="checkbox" name="elementType" class="elements" value="wind_d">&nbsp;風向
-            <input type="checkbox" name="elementType" class="elements" value="solar">&nbsp;日射
-            <input type="checkbox" name="elementType" class="elements" value="rain">&nbsp;雨感
-            <input type="checkbox" name="elementType" class="elements" value="rain_f">&nbsp;1時間雨量
-            <input type="checkbox" name="elementType" class="elements" value="rain_i">&nbsp;降水強度
-            <input type="checkbox" name="elementType" class="elements" value="rain_c">&nbsp;連続雨量
-            <input type="checkbox" name="elementType" class="elements" value="wbgt">&nbsp;暑さ指数
-            <input type="checkbox" name="elementType" class="elements" value="weather">&nbsp;天気
+            <input type="checkbox" name="elementType" class="elements" id="inTemp" value="temp" checked="checked">
+            <label for="inTemp">気温</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inHumi" value="humi">
+            <label for="inHumi">湿度</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l">
+            <label for="inPress_l">現地気圧</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s">
+            <label for="">海面気圧</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inWind_d" value="wind_d">
+            <label for="inWind_d">風向</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inSolar" value="solar">
+            <label for="inSolar">日射</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inRain" value="rain">
+            <label for="inRain">雨感</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inRain_f" value="rain_f">
+            <label for="inRain_f">1時間雨量</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inRain_i" value="rain_i">
+            <label for="inRain_i">降水強度</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inRain_c" value="rain_c">
+            <label for="inRain_c">連続雨量</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inWbgt" value="wbgt">
+            <label for="inWbgt">暑さ指数</lable>
+            <input type="checkbox" name="elementType" class="elements" id="inWater" value="weather">
+            <label for="inWater">天気</lable>
           </div>
       </div>
       <div class="row">
@@ -371,7 +384,7 @@
             <input type="text" id="inX" name="inX" value="" />
             <label for="inX">Xタイル番号：</label>
           </div>
-          <div class="col s6">
+          <div class="input-field col s6">
             <input type="text" id="inY" name="inY" value="" />
             <label for="inY">Yタイル番号：</label>
           </div>
@@ -402,10 +415,11 @@
       </div>
       <div class="row">
           <div class="input-field col s12">
-            <textarea id="dispArea" class="textarea" rows="20" cols="50" class="materialize-textarea"></textarea>
+            <textarea id="dispArea" class="materialize-textarea"></textarea>
             <label for="dispArea">取得したJSON</label>
           </div>
       </div>
+    </form>
       <footer>
         <p>&nbsp;</p>
       </footer>
