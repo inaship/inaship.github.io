@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>14 CIRCUIT LIVE WEATHER</title>
+    <title>15 CIRCUIT LIVE WEATHER</title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -66,6 +66,7 @@
           if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
             var resText = req.responseText;
             $('#dispArea').val(resText);
+            $('#dispArea').trigger('autoresize');
             watherJson = JSON.parse(resText);
             console.log("watherJson = " + JSON.stringify(watherJson));
           } else {
@@ -221,7 +222,6 @@
         */
 
         $('select').material_select();
-        $('#dispArea').trigger('autoresize');
       });
     </script>
   </head>
