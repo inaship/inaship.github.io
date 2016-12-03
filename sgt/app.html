@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="ja" manifest="cache-manifest.appcache">
+<html ng-app="myApp" lang="ja" manifest="cache-manifest.appcache">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="inaship" />
     <meta name="copyright" content="inaship" />
     <meta name="description" content="SGT CIRCUIT LIVE WEATHER" />
     <meta name=”robots” content=”noindex,follow” />
-    <!--<base href="http://inaship.github.com/">-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>SGT CIRCUIT LIVE WEATHER</title>
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <title>SGT CIRCUIT LIVE WEATHER - Angular JS</title>
+    <script src="app.js"></script>
     <script type="text/javascript">
       // 各種変数
       var sgtLW;  // 設定用変数
@@ -229,123 +226,123 @@
         </div>
       </nav>
     </header>
-    <main>
+    <main ng-controller="AppController">
       <div class="container">
         <div class="row">
           <div class="input-field col s6 l3">
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWater" value="weather" checked="checked" />
+              <input type="checkbox" name="elementType" class="elements" id="inWater" ng-model="inWater" value="weather" checked="checked" />
               <label for="inWater">天気</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inTemp" value="temp" checked="checked" />
+              <input type="checkbox" name="elementType" class="elements" id="inTemp" ng-model="inTemp" value="temp" checked="checked" />
               <label for="inTemp">気温</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inHumi" value="humi" />
+              <input type="checkbox" name="elementType" class="elements" id="inHumi" ng-model="inHumi" value="humi" />
               <label for="inHumi">湿度</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inSolar" value="solar" />
+              <input type="checkbox" name="elementType" class="elements" id="inSolar" ng-model="inSolar" value="solar" />
               <label for="inSolar">日射</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWind_d" value="wind_d" />
+              <input type="checkbox" name="elementType" class="elements" id="inWind_d" ng-model="inWind_d" value="wind_d" />
               <label for="inWind_d">風向</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWind_s" value="wind_s" />
+              <input type="checkbox" name="elementType" class="elements" id="inWind_s" ng-model="inWind_s" value="wind_s" />
               <label for="inWind_s">風速</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l" />
+              <input type="checkbox" name="elementType" class="elements" id="inPress_l" ng-model="inPress_l" value="press_l" />
               <label for="inPress_l">現地気圧</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s" />
+              <input type="checkbox" name="elementType" class="elements" id="inPress_s" ng-model="inPress_s" value="press_s" />
               <label for="inPress_s">海面気圧</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain" value="rain" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain" ng-model="inRain" value="rain" />
               <label for="inRain">雨感</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_f" value="rain_f" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_f" ng-model="inRain_f" value="rain_f" />
               <label for="inRain_f">1時間雨量</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_i" value="rain_i" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_i" ng-model="inRain_i" value="rain_i" />
               <label for="inRain_i">降水強度</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_c" value="rain_c" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_c" ng-model="inRain_c" value="rain_c" />
               <label for="inRain_c">連続雨量</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_e" value="rain_e" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_e" ng-model="inRain_e" value="rain_e" />
               <label for="inRain_e">実効雨量</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWbgt" value="wbgt" />
+              <input type="checkbox" name="elementType" class="elements" id="inWbgt" ng-model="inWbgt" value="wbgt" />
               <label for="inWbgt">暑さ指数</label>
             </p>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <input type="text" id="inSwPoint" />
+            <input type="text" id="inSwPoint" ng-model="inSwPoint" />
             <label for="inSwPoint">南西端緯度経度：</label>
           </div>
           <div class="input-field col s12 l6">
-            <input type="text" id="inNePoint" />
+            <input type="text" id="inNePoint" ng-model="inNePoint" />
             <label for="inNePoint">北東端緯度経度：</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <input type="text" id="inJisCode_pref" />
+            <input type="text" id="inJisCode_pref" ng-model="inJisCode_pref" />
             <label for="inJisCode_pref">都道府県コード：</label>
           </div>
           <div class="input-field col s12 l6">
-            <input type="text" id="inJisCode_city" />
+            <input type="text" id="inJisCode_city" ng-model="inJisCode_city" />
             <label for="inJisCode_city">市町村コード：</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <select id="inPoteka">
+            <select id="inPoteka" ng-model="inPoteka">
               <option value="true" selected="selected">取得する</option>
               <option value="false">取得しない</option>
             </select>
             <label>POTEKAデータ有無：</label>
           </div>
           <div class="input-field col s12 l6">
-            <input type="text" id="inPotekaId" />
+            <input type="text" id="inPotekaId" ng-model="inPotekaId" />
             <label for="inPotekaId">POTEKA ID：</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <select id="inAmedas">
+            <select id="inAmedas" ng-model="inAmedas">
               <option value="true" selected="selected">取得する</option>
               <option value="false">取得しない</option>
             </select>
             <label>アメダスデータ有無：</label>
           </div>
           <div class="input-field col s12 l6">
-            <input type="text" id="inAmedasId" />
+            <input type="text" id="inAmedasId" ng-model="inAmedasId" />
             <label for="inAmedasId">アメダス ID：</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <select id="inZoomLevel">
+            <select id="inZoomLevel" ng-model="inZoomLevel">
               <option value="4">4</option>
               <option value="5">5</option>
               <option value="6">6</option>
@@ -357,7 +354,7 @@
             <label>ズームレベル：</label>
           </div>
           <div class="input-field col s12 l6">
-            <select id="inInterval">
+            <select id="inInterval" ng-model="inInterval">
               <option value="1">1</option>
               <option value="3">3</option>
               <option value="6">6</option>
@@ -367,49 +364,13 @@
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <select id="inDataPeriod">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-              <option value="19">19</option>
-              <option value="20">20</option>
-              <option value="21">21</option>
-              <option value="22">22</option>
-              <option value="23">23</option>
-              <option value="24">24</option>
-              <option value="25">25</option>
-              <option value="26">26</option>
-              <option value="27">27</option>
-              <option value="28">28</option>
-              <option value="29">29</option>
-              <option value="30">30</option>
-              <option value="31">31</option>
-              <option value="32">32</option>
-              <option value="33">33</option>
-              <option value="34">34</option>
-              <option value="35">35</option>
-              <option value="36">36</option>
+            <select id="inDataPeriod" ng-model="inDataPeriod">
+              <option ng-repeat="member in AppController.inDataPeriodValue" value="{{member.value}}">{{member.text}}</option>
             </select>
             <label>予報収集時間：</label>
           </div>
           <div class="input-field col s12 l6">
-            <select id="inRader">
+            <select id="inRader" ng-model="inRader">
               <option value="true">取得する</option>
               <option value="false" selected="selected">取得しない</option>
             </select>
@@ -418,27 +379,27 @@
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <input type="text" id="inX" />
+            <input type="text" id="inX" ng-model="inX" />
             <label for="inX">Xタイル番号：</label>
           </div>
           <div class="input-field col s12 l6">
-            <input type="text" id="inY" />
+            <input type="text" id="inY" ng-model="inY" />
             <label for="inY">Yタイル番号：</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <input type="text" id="inStartDate" />
+            <input type="text" id="inStartDate" ng-model="inStartDate" />
             <label for="inStartDate">取得開始日時：</label>
           </div>
           <div class="input-field col s12 l6">
-            <input type="text" id="inEndDate" value="latest" />
+            <input type="text" id="inEndDate" ng-model="inEndDate" value="latest" />
             <label for="inEndDate">取得終了日時：</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <select id="targetAPI">
+            <select id="targetAPI" ng-model="targetAPI">
               <option value="0" selected="selected">都道府県指定データ</option>
               <option value="1">市町村指定データ</option>
               <option value="2">POTEKA指定データ</option>
@@ -450,12 +411,12 @@
             <label>ターゲットAPI：</label>
           </div>
           <div class="input-field col s12 l6 center-align">
-            <a class="waves-effect waves-light btn-large red darken-4" onclick="getWatherJSON();"><i class="material-icons left">wb_sunny</i>天気データを取得して表示</a>
+            <a class="waves-effect waves-light btn-large red darken-4" onclick="getWatherJSON();" ng-model="myAppSubmit"><i class="material-icons left">wb_sunny</i>天気データを取得して表示</a>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 l12">
-            <textarea id="dispArea" class="materialize-textarea"></textarea>
+            <textarea id="dispArea" class="materialize-textarea" ng-model="dispArea"></textarea>
             <label for="dispArea">取得したJSON</label>
           </div>
         </div>
