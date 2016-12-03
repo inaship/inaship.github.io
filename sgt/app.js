@@ -1,9 +1,6 @@
 // app.js
 angular.module('myApp', []);
-
-
   .controller('AppController', function($scope) {
-
     this.inDataPeriodValue = [
       { value: 0, text: 0 },
       { value: 1, text: 1 },
@@ -43,18 +40,5 @@ angular.module('myApp', []);
       { value: 35, text: 35 },
       { value: 36, text: 36 }
     ]
-    // 入力されたユーザー名を保持
-    $scope.username = '';
-    // ユーザー一覧（空の配列で初期化）
-    $scope.users = [];
-    // 登録を押されたときの関数
-    /*
-    $scope.submit = function() {
-      // 新しいユーザーをユーザー一覧に登録する
-      $scope.users.push({
-        username: $scope.username,
-        url: '//twitter.com/' + $scope.username
-      });
-    };
-    */
+
   });
