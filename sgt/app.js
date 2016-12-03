@@ -1,6 +1,7 @@
 // app.js
 angular.module('myApp', []);
   .controller('AppController', function($scope) {
+    /*
     this.inDataPeriodValue = [
       { value: 0, text: 0 },
       { value: 1, text: 1 },
@@ -40,5 +41,5 @@ angular.module('myApp', []);
       { value: 35, text: 35 },
       { value: 36, text: 36 }
     ]
-
+    */
   });
