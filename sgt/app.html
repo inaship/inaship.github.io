@@ -13,6 +13,12 @@
     <title>SGT CIRCUIT LIVE WEATHER - Angular JS</title>
     <!--script src="components.js"></script-->
     <script src="app.js"></script>
+    <style>
+      .mdl-textfield__input {
+        width : 100%;
+        height: 100%;
+      }
+    </style>
   </head>
   <body ng-controller="AppController">
     <!-- Always shows a header, even in smaller screens. -->
@@ -44,7 +50,16 @@
       <main class="mdl-layout__content">
         <div class="page-content">
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
+            <div class="mdl-cell mdl-cell--6-col">
+              <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col">
+                  <button class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">mood</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
               <div class="mdl-textfield mdl-js-textfield">
                 <textarea class="mdl-textfield__input" type="text" rows= "10" id="dispArea" ></textarea>
                 <label class="mdl-textfield__label" for="dispArea">天気情報JSON</label>
