@@ -124,10 +124,14 @@
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
-            <select id="inAmedas" ng-model="inAmedas">
-              <option value="true" selected="selected">取得する</option>
-              <option value="false">取得しない</option>
-            </select>
+            <div class="switch">
+              <label>
+                取得しない
+                <input type="checkbox" id="inAmedas" ng-model="inAmedas">
+                <span class="lever"></span>
+                取得する
+              </label>
+            </div>
             <label>アメダスデータ有無：</label>
           </div>
           <div class="input-field col s12 l6">
