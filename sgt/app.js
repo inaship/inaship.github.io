@@ -1,5 +1,4 @@
-// app.js
-angular.module('myApp', []);
+angular.module('app', []);
   .controller('AppController', function($scope) {
     /*
     this.inDataPeriodValue = [
