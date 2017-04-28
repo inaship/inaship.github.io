@@ -58,12 +58,8 @@
         console.log(reqURL);
         req.open("GET",reqURL, false);
         //req.setRequestHeader("X-POTEKA-Authorization", authtext);
-        req.send(null);
+        req.send();
       }
-
-      $(function () {
-        getWatherJSON();
-      });
 
     </script>
   </head>
@@ -78,8 +74,9 @@
     <main>
       <div class="container">
         <div class="row">
-          <div>
-            <textarea id="dispArea" rows="10" cols="40"></textarea>
+          <div
+            <input type="button" onclick="getWatherJSON();" value="取得" />
+                      <textarea id="dispArea" rows="10" cols="40"></textarea>
           </div>
       </div>
     </main>
