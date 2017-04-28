@@ -59,6 +59,10 @@
         req.send(null);
       }
 
+      $(function () {
+        getWatherJSON();
+      });
+
     </script>
   </head>
   <body>
@@ -72,8 +76,8 @@
     <main>
       <div class="container">
         <div class="row">
-          <div class="input-field col s6 l3">
-            <textarea id="dispArea"></textare>
+          <div>
+            <textarea id="dispArea" rows="10" cols="40"></textare>
           </div>
       </div>
     </main>
