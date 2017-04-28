@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja" manifest="cache-manifest.appcache">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="inaship" />
+    <meta name="copyright" content="inaship" />
+    <meta name="description" content="SGT CIRCUIT LIVE WEATHER" />
+    <meta name=”robots” content=”noindex,nofollow” />
+    <!--<base href="http://inaship.github.com/">-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <title>CIRCUIT LIVE WEATHER</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      // 各種変数
+      var sgtLW;  // 設定用変数
+      var apiDomain;
+      var authtext;
+      var watherJson;
+
+      // 外部ファイル読み込み
+      function loadSetting(){
+        $.ajaxSetup({async: false});
+        $.getJSON("setting.json", function(json){
+          sgtLW = json;
+          apiDomain = sgtLW.api_domain;
+          authtext = sgtLW.auth_pass;
+        })
+        $.ajaxSetup({async: true});
+      }
+
+      // 天気情報読み込み
+      function getWatherJSON() {
+        var elements = getCheckElements();
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function() {
+          if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
+            var resText = req.responseText;
+            $('#dispArea').val(resText);
+            $('#dispArea').trigger('autoresize');
+            watherJson = JSON.parse(resText);
+            console.log("watherJson = " + JSON.stringify(watherJson));
+          } else {
+            var resText = req.statusText;
+            $('#dispArea').val(resText);
+          }
+        };
+        reqUrl = createRecUrl(elements);
+        req.open("GET", reqUrl, false);
+        req.setRequestHeader("X-POTEKA-Authorization", authtext);
+        req.send(null);
+      }
+
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav class="top-nav grey darken-4">
+        <div class="container">
+          <div class="nav-wrapper"><a class="page-title">SGT CIRCUIT LIVE WATHER</a></div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="input-field col s6 l3">
+
+          </div>
+      </div>
+    </main>
+    <footer class="page-footer grey darken-3">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 l12"></div>
+        </div>
+      </div>
+      <div class="footer-copyright grey darken-4">
+        <div class="container">
+          Copyright ©SUPERGT.net All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
