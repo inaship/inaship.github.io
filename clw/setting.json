@@ -1,5 +1,5 @@
 {
     "app_name":"LIVE WATHER",
-    "api_domain":"https://s3-ap-northeast-1.amazonaws.com",
-    "json_path":"/cdn.clweather.com/sample.json"
+    "api_domain":"https://d3t8dtgn3tr812.cloudfront.net/",
+    "json_path":"sample.json"
 }
