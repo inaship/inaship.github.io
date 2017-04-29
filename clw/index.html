@@ -37,6 +37,9 @@
 
       // 天気情報読み込み
       function getWatherJSON() {
+        reqURL = apiDomain+jsonPath;
+        console.log(reqURL);
+
        document.cookie = "CloudFront-Key-Pair-Id=" + cfKeyPairId + "; CloudFront-Policy=" + cfPolicy + "; CloudFront-Signature=" + cfSignature + "; "
 
         var req = new XMLHttpRequest();
@@ -52,13 +55,12 @@
             $('#dispArea').val(resText);
           }
         };
-        reqURL = apiDomain+jsonPath;
-        console.log(reqURL);
-        req.open("GET",reqURL, false);
+        req.open("GET",reqURL, true);
         req.withCredentials = true;
         req.send(null);
         //req.setRequestHeader("X-POTEKA-Authorization", authtext);
       }
+
       $(document).ready(function() {
         console.log("start");
         loadSetting();
