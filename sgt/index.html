@@ -39,7 +39,7 @@
         nePoint: "36.4369,139.4398",
         jisCode_city: "10204",
         jisCode_pref: "09,10",
-        potekaId: "235",
+        potekaId: "625",
         poteka: true,
         amedasId: "42302",
         amedas: true,
@@ -242,57 +242,57 @@
               <label for="inTemp">気温</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inHumi" value="humi" />
+              <input type="checkbox" name="elementType" class="elements" id="inHumi" value="humi" checked="checked" />
               <label for="inHumi">湿度</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inSolar" value="solar" />
+              <input type="checkbox" name="elementType" class="elements" id="inSolar" value="solar" checked="checked" />
               <label for="inSolar">日射</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWind_d" value="wind_d" />
+              <input type="checkbox" name="elementType" class="elements" id="inWind_d" value="wind_d" checked="checked" />
               <label for="inWind_d">風向</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWind_s" value="wind_s" />
+              <input type="checkbox" name="elementType" class="elements" id="inWind_s" value="wind_s" checked="checked" />
               <label for="inWind_s">風速</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l" />
+              <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l" checked="checked" />
               <label for="inPress_l">現地気圧</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s" />
+              <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s" checked="checked" />
               <label for="inPress_s">海面気圧</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain" value="rain" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain" value="rain" checked="checked" />
               <label for="inRain">雨感</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_f" value="rain_f" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_f" value="rain_f" checked="checked" />
               <label for="inRain_f">1時間雨量</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_i" value="rain_i" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_i" value="rain_i" checked="checked" />
               <label for="inRain_i">降水強度</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_c" value="rain_c" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_c" value="rain_c" checked="checked" />
               <label for="inRain_c">連続雨量</label>
             </p>
           </div>
           <div class="input-field col s6 l3">
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inRain_e" value="rain_e" />
+              <input type="checkbox" name="elementType" class="elements" id="inRain_e" value="rain_e" checked="checked" />
               <label for="inRain_e">実効雨量</label>
             </p>
             <p>
-              <input type="checkbox" name="elementType" class="elements" id="inWbgt" value="wbgt" />
+              <input type="checkbox" name="elementType" class="elements" id="inWbgt" value="wbgt" checked="checked" />
               <label for="inWbgt">暑さ指数</label>
             </p>
           </div>
@@ -439,9 +439,9 @@
         <div class="row">
           <div class="input-field col s12 l6">
             <select id="targetAPI">
-              <option value="0" selected="selected">都道府県指定データ</option>
+              <option value="0">都道府県指定データ</option>
               <option value="1">市町村指定データ</option>
-              <option value="2">POTEKA指定データ</option>
+              <option value="2" selected="selected">POTEKA指定データ</option>
               <option value="3">アメダス指定データ</option>
               <option value="4">矩形指定データ（real）</option>
               <option value="5">雨雲レーダー指定データ</option>
