@@ -1,5 +1,13 @@
 angular.module('app', []);
-  .controller('AppController', function($scope) {
+
+  .controller('AppController', ['$scope', function($scope) {
+    console.log("test");
+    $scope.targetItem.onTargetAPIChange = function($event){
+        console.log("test");
+        $scope.targetAPI.value(scope.vale);
+    };
+  }]);
+
     /*
     this.inDataPeriodValue = [
       { value: 0, text: 0 },
@@ -41,4 +49,3 @@ angular.module('app', []);
       { value: 36, text: 36 }
     ]
     */
-  });

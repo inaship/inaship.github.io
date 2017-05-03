@@ -1,86 +1,477 @@
 <!DOCTYPE html>
-<html ng-app="app" lang="ja" manifest="cache-manifest.appcache">
+<html lang="ja" manifest="cache-manifest.appcache">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="inaship" />
     <meta name="copyright" content="inaship" />
     <meta name="description" content="SGT CIRCUIT LIVE WEATHER" />
     <meta name=”robots” content=”noindex,follow” />
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
-    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="//code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-    <script defer src="//code.getmdl.io/1.2.1/material.min.js"></script>
-    <title>SGT CIRCUIT LIVE WEATHER - Angular JS</title>
-    <!--script src="components.js"></script-->
-    <script src="app.js"></script>
-    <style>
-      .mdl-textfield__input {
-        width : 100%;
-        height: 100%;
+    <!--<base href="http://inaship.github.com/">-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>SGT CIRCUIT LIVE WEATHER</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      // 各種変数
+      var sgtLW;  // 設定用変数
+      var apiDomain;
+      var authtext;
+      var watherJson;
+
+      // 外部ファイル読み込み
+      function loadSetting(){
+        $.ajaxSetup({async: false});
+        $.getJSON("http://inaship.github.io/sgt/setting.json", function(json){
+          sgtLW = json;
+          apiDomain = sgtLW.api_domain;
+          authtext = sgtLW.auth_pass;
+        })
+        $.ajaxSetup({async: true});
       }
-    </style>
+
+      // 初期値
+      var defParam = {
+        swPoint: "36.1769,138.9866",
+        nePoint: "36.4369,139.4398",
+        jisCode_city: "10204",
+        jisCode_pref: "09,10",
+        potekaId: "235",
+        poteka: true,
+        amedasId: "42302",
+        amedas: true,
+        zoomLevel: 12,
+        interval: 1,
+        dataPeriod: 0,
+        rader: true,
+        x: 429,
+        y: 218,
+        startDate: "",
+        endtDate: "latest",
+        datetime: "2016-11-27T16:00:00+00:00"
+      };
+
+      // 天気情報読み込み
+      function getWatherJSON() {
+        var elements = getCheckElements();
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function() {
+          if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
+            var resText = req.responseText;
+            $('#dispArea').val(resText);
+            $('#dispArea').trigger('autoresize');
+            watherJson = JSON.parse(resText);
+            console.log("watherJson = " + JSON.stringify(watherJson));
+          } else {
+            var resText = req.statusText;
+            $('#dispArea').val(resText);
+          }
+        };
+        reqUrl = createRecUrl(elements);
+        req.open("GET", reqUrl, false);
+        req.setRequestHeader("X-POTEKA-Authorization", authtext);
+        req.send(null);
+      }
+
+      // apiURLを生成
+      function createRecUrl(el){
+        var retVal;
+        var s = Number($("#targetAPI").val());
+        console.log("elements =" + el );
+        console.log("s = " + s);
+        var tgApi;
+        switch(s){
+          case 0 : tgApi = "/v1/area/real/ja/prefecture"
+                         + "?jisCode=" + $("#inJisCode_pref").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
+                         + "&element=" + el;
+            break;
+          case 1 : tgApi = "/v1/area/real/ja/city"
+                         + "?jisCode=" + $("#inJisCode_city").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
+                         + "&element=" + el;
+            break;
+          case 2 : tgApi = "/v1/point/real/ja/poteka"
+                         + "?potekaId=" + $("#inPotekaId").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&element=" + el;
+            break;
+          case 3 : tgApi = "/v1/point/real/ja/amedas"
+                         + "?amedasId=" + $("#inAmedasId").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&element=" + el;
+            break;
+          case 4 : tgApi = "/v1/area/real/rectangle"
+                         + "?swPoint=" + $("#inSwPoint").val()
+                         + "&nePoint=" + $("#inNePoint").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
+                         + "&element=" + el;
+            break;
+          case 5 : tgApi = "/v1/point/real/ja/radar"
+                         + "?zoomLevel=" + $("#inZoomLevel").val()
+                         + "&x=" + $("#inX").val()
+                         + "&y=" + $("#inY").val()
+                         + "&datetime=" + getTimeStamp();
+            break;
+          case 6 : tgApi = "/v1/area/forecast/rectangle"
+                         + "?swPoint=" + $("#inSwPoint").val()
+                         + "&nePoint=" + $("#inNePoint").val()
+                         + "&dataPeriod=" + $("#inDataPeriod").val()
+                         + "&interval=" + $("#inInterval").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
+                         + "&element=" + el;
+            break;
+          default: tgApi = "/v1/area/real/ja/prefecture"
+                         + "?jisCode=" + $("#inJisCode_pref").val()
+                         + "&startDate=" + $("#inStartDate").val()
+                         + "&endDate=" + $("#inEndtDate").val()
+                         + "&poteka=" + $("#inPoteka").val()
+                         + "&amedas=" + $("#inAmedas").val()
+                         + "&radar=" + $("#inRader").val()
+                         + "&zoomLevel=" + $("#inZoomLevel").val()
+                         + "&element=" + el;
+        }
+        retVal = apiDomain + tgApi;
+        console.log(retVal);
+        return retVal;
+      }
+
+      // チェックしたエレメントを取得
+      function getCheckElements() {
+        var el = $('[class="elements"]:checked').map(function(){
+          return $(this).val()
+        }).get().join(',');
+        return el;
+      }
+
+      function htmlJSON() {
+        // 最初のキーの名前を取り出す
+        var apiKey = watherJson[0];
+        console.log("apiKey = " + JSON.stringify(watherJson));
+        for(var i in watherJson){
+          $("#dispDiv").append("<li><strong>" + watherJson[i].element + "</strong></li>");
+          for(var j in watherJson[i].element){
+            $("#dispDiv").append("<li>" + watherJson[i].element[j].elementName + "（" + watherJson[i].element[j].sampling + "</li>n");
+          }
+        }
+      }
+
+      function ISODateString(d){
+        function pad(n){return n<10 ? '0'+n : n}
+        return d.getUTCFullYear()+'-'
+          + pad(d.getUTCMonth()+1)+'-'
+          + pad(d.getUTCDate())+'T'
+          + pad(d.getUTCHours())+':'
+          + pad(d.getUTCMinutes())+':'
+          + pad(d.getUTCSeconds())+'+09:00'
+      }
+      function getTimeStamp(){
+        var d = new Date();
+        var now = ISODateString(d);
+        console.log(now);
+        return now;
+      }
+
+      // イニシャライズ
+      $(document).ready(function() {
+        loadSetting();
+        $("#inSwPoint").val(defParam["swPoint"]);
+        $("#inNePoint").val(defParam["nePoint"]);
+        $("#inJisCode_city").val(defParam["jisCode_city"]);
+        $("#inJisCode_pref").val(defParam["jisCode_pref"]);
+        $("#inX").val(defParam["x"]);
+        $("#inY").val(defParam["y"]);
+        $("#inPotekaId").val(defParam["potekaId"]);
+        $("#inAmedasId").val(defParam["amedasId"]);
+        //$("#inStartDate").val(getTimeStamp());
+        $("#inEndtDate").val(defParam["endtDate"]);
+        /*
+        $("#inPoteka").val(defParam["poteka"]);
+        $("#inPotekaId").val(defParam["potekaId"]);
+        $("#inAmedas").val(defParam["amedas"]);
+        $("#inAmedasId").val(defParam["amedasId"]);
+        $("#inZoomLevel").val(defParam["zoomLevel"]);
+        $("#ininInterval").val(defParam["interval"]);
+        */
+
+        $('select').material_select();
+      });
+    </script>
   </head>
-  <body ng-controller="AppController">
-    <!-- Always shows a header, even in smaller screens. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title">CIRCUIT LIVE WEATHER</span>
-          <!-- Add spacer, to align navigation to the right -->
-          <div class="mdl-layout-spacer"></div>
-          <!-- Navigation. We hide it in small screens. -->
-          <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-          </nav>
+  <body>
+    <header>
+      <nav class="top-nav grey darken-4">
+        <div class="container">
+          <div class="nav-wrapper"><a class="page-title">SGT CIRCUIT LIVE WATHER</a></div>
         </div>
-      </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">LIVE WEATHER</span>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-        </nav>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="input-field col s6 l3">
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inWater" value="weather" checked="checked" />
+              <label for="inWater">天気</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inTemp" value="temp" checked="checked" />
+              <label for="inTemp">気温</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inHumi" value="humi" />
+              <label for="inHumi">湿度</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inSolar" value="solar" />
+              <label for="inSolar">日射</label>
+            </p>
+          </div>
+          <div class="input-field col s6 l3">
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inWind_d" value="wind_d" />
+              <label for="inWind_d">風向</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inWind_s" value="wind_s" />
+              <label for="inWind_s">風速</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inPress_l" value="press_l" />
+              <label for="inPress_l">現地気圧</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inPress_s" value="press_s" />
+              <label for="inPress_s">海面気圧</label>
+            </p>
+          </div>
+          <div class="input-field col s6 l3">
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inRain" value="rain" />
+              <label for="inRain">雨感</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inRain_f" value="rain_f" />
+              <label for="inRain_f">1時間雨量</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inRain_i" value="rain_i" />
+              <label for="inRain_i">降水強度</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inRain_c" value="rain_c" />
+              <label for="inRain_c">連続雨量</label>
+            </p>
+          </div>
+          <div class="input-field col s6 l3">
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inRain_e" value="rain_e" />
+              <label for="inRain_e">実効雨量</label>
+            </p>
+            <p>
+              <input type="checkbox" name="elementType" class="elements" id="inWbgt" value="wbgt" />
+              <label for="inWbgt">暑さ指数</label>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input type="text" id="inSwPoint" />
+            <label for="inSwPoint">南西端緯度経度：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input type="text" id="inNePoint" />
+            <label for="inNePoint">北東端緯度経度：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input type="text" id="inJisCode_pref" />
+            <label for="inJisCode_pref">都道府県コード：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input type="text" id="inJisCode_city" />
+            <label for="inJisCode_city">市町村コード：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <select id="inPoteka">
+              <option value="true" selected="selected">取得する</option>
+              <option value="false">取得しない</option>
+            </select>
+            <label>POTEKAデータ有無：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input type="text" id="inPotekaId" />
+            <label for="inPotekaId">POTEKA ID：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <select id="inAmedas">
+              <option value="true" selected="selected">取得する</option>
+              <option value="false">取得しない</option>
+            </select>
+            <label>アメダスデータ有無：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input type="text" id="inAmedasId" />
+            <label for="inAmedasId">アメダス ID：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <select id="inZoomLevel">
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+            <label>ズームレベル：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <select id="inInterval">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="6">6</option>
+            </select>
+            <label>データ間隔：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <select id="inDataPeriod">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+              <option value="32">32</option>
+              <option value="33">33</option>
+              <option value="34">34</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+            </select>
+            <label>予報収集時間：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <select id="inRader">
+              <option value="true">取得する</option>
+              <option value="false" selected="selected">取得しない</option>
+            </select>
+            <label>雨雲レーダー画像有無：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input type="text" id="inX" />
+            <label for="inX">Xタイル番号：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input type="text" id="inY" />
+            <label for="inY">Yタイル番号：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input type="text" id="inStartDate" />
+            <label for="inStartDate">取得開始日時：</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input type="text" id="inEndDate" value="latest" />
+            <label for="inEndDate">取得終了日時：</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <select id="targetAPI">
+              <option value="0" selected="selected">都道府県指定データ</option>
+              <option value="1">市町村指定データ</option>
+              <option value="2">POTEKA指定データ</option>
+              <option value="3">アメダス指定データ</option>
+              <option value="4">矩形指定データ（real）</option>
+              <option value="5">雨雲レーダー指定データ</option>
+              <option value="6">矩形指定データ（forecast）</option>
+            </select>
+            <label>ターゲットAPI：</label>
+          </div>
+          <div class="input-field col s12 l6 center-align">
+            <a class="waves-effect waves-light btn-large red darken-4" onclick="getWatherJSON();"><i class="material-icons left">wb_sunny</i>天気データを取得して表示</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l12">
+            <textarea id="dispArea" class="materialize-textarea"></textarea>
+            <label for="dispArea">取得したJSON</label>
+          </div>
+        </div>
       </div>
-      <main class="mdl-layout__content">
-        <div class="page-content">
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--6-col">
-              <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--12-col">
-                  <button class="mdl-button mdl-js-button mdl-button--icon">
-                    <i class="material-icons">mood</i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="mdl-cell mdl-cell--6-col">
-              <div class="mdl-textfield mdl-js-textfield">
-                <textarea class="mdl-textfield__input" type="text" rows= "10" id="dispArea" ></textarea>
-                <label class="mdl-textfield__label" for="dispArea">天気情報JSON</label>
-              </div>
-          </div>
-          </div>
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--6-col">A</div>
-            <div class="mdl-cell mdl-cell--6-col">B</div>
-          </div>
+    </main>
+    <footer class="page-footer grey darken-3">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 l12"></div>
         </div>
-      </main>
-      <footer class="mdl-mini-footer">
-        <div class="mdl-mini-footer__left-section">
-          <div class="mdl-logo">Title</div>
-          <ul class="mdl-mini-footer__link-list">
-            <li><a href="#">Help</a></li>
-            <li><a href="#">Privacy & Terms</a></li>
-          </ul>
+      </div>
+      <div class="footer-copyright grey darken-4">
+        <div class="container">
+          Copyright ©SUPERGT.net All rights reserved.
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   </body>
 </html>
