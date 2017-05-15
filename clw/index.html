@@ -42,7 +42,7 @@
         reqURL = apiDomain+jsonPath;
         console.log(reqURL);
 
-       document.cookie = "CloudFront-Key-Pair-Id=" + cfKeyPairId + "; CloudFront-Policy=" + cfPolicy + "; CloudFront-Signature=" + cfSignature + "; "
+       document.cookie = "CloudFront-Key-Pair-Id=" + cfKeyPairId + ";CloudFront-Policy=" + cfPolicy + ";CloudFront-Signature=" + cfSignature + ";"
 
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
