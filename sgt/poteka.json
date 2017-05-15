@@ -1,0 +1,168 @@
+{
+    "poteka": [
+        {
+            "stationInfo": {
+                "stationId": "625",
+                "stationName": "富士スピードウェイ",
+                "latitude": 35.3714,
+                "longitude": 138.928
+            },
+            "element": [
+                {
+                    "elementName": "weather",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": "sunny",
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "temp",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 15.9,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "humi",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 48,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "solar",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 822,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "wind_d",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 183,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "wind_s",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 2.1,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "press_l",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 961.4,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "press_s",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 1029,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "rain",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": "false",
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "rain_f",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 0,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "rain_i",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 0,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "rain_c",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 0,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "rain_e",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 0,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                },
+                {
+                    "elementName": "wbgt",
+                    "sampling": "1min",
+                    "dataList": [
+                        {
+                            "datatime": "2017-05-03T00:20:00+00:00",
+                            "value": 14.5,
+                            "dataQualityFlag": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

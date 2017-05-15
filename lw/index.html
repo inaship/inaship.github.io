@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja" manifest="cache-manifest.appcache">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="SGT LIVE WEATHER" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name=”robots” content=”noindex,follow” />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <title>SGT LIVE WEATHER CF TEST</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      var reqURL = "https://d3t8dtgn3tr812.cloudfront.net/fj/01_201705151000.json";
+
+      var cfKeyPairId = 'APKAJDCUNKCNATZQXW3A';
+      var cfPolicy = 'eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kM3Q4ZHRnbjN0cjgxMi5jbG91ZGZyb250Lm5ldC8qIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxODA4MzY5MDk4fX19XX0_';
+      var cfSignature = 'IJZ9Aag0hPtcP459JCzV1A8CEeI-b3yuZVSRyFlz1ZwWPy-sryO~arnkdJJHWFGe558R7aeNq6asaGn~2v3TX57Qra-m6seHQecLPtFMzjL-smA78b8oY9Ot~JcEVjf0BUlf1ptaLVaSiPXAZLEllZMEFMH2USDr1DwG4zkhkQRUyPQFDx3oN7P7uEwzLFCj0jxwAPvdvea7l8zURtEeaTjW9BNwc1-Z0EAgJKS0~Trz6o9nwWHUkP7cyGqgF9hMp-Yh7DjQEdWm4IVfQGW9vG4RvsvIpjOHNUYnbEP4jWkfFP5Ue2a5AdBZtYWRFVZlKwOU8DqKOFBJdwhPTJ9v9g__';
+
+      function getWatherJSON() {
+       document.cookie = "CloudFront-Key-Pair-Id=" + cfKeyPairId + ";";
+       document.cookie = "CloudFront-Policy=" + cfPolicy + ";";
+       document.cookie = "CloudFront-Signature=" + cfSignature + ";";
+
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function() {
+          if(req.readyState == 4 && req.status == 200){
+            var resText = req.responseText;
+            $('#dispArea').val(resText);
+            $('#dispArea').trigger('autoresize');
+            watherJson = JSON.parse(resText);
+            console.log("watherJson = " + JSON.stringify(watherJson));
+          } else {
+            var resText = req.statusText;
+            $('#dispArea').val(resText);
+          }
+        };
+        req.open("GET",reqURL, true);
+        //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.withCredentials = true;
+        req.addEventListener('load', onLoadFunc, false);
+        req.send(null);
+      }
+      function onLoadFunc() {
+        //
+      }
+
+      // イニシャライズ
+      $(document).ready(function() {
+        console.log(reqURL);
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav class="top-nav grey darken-4">
+        <div class="container">
+          <div class="nav-wrapper"><a class="page-title">SGT LIVE WATHER CF TEST</a></div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="input-field col s12 l12 center-align">
+            <a class="waves-effect waves-light btn-large red darken-4" onclick="getWatherJSON();"><i class="material-icons left">wb_sunny</i>JSONにアクセス</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l12">
+            <textarea id="dispArea" class="materialize-textarea"></textarea>
+            <label for="dispArea">取得したJSON</label>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="page-footer grey darken-3">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 l12"></div>
+        </div>
+      </div>
+      <div class="footer-copyright grey darken-4">
+        <div class="container">
+          Copyright ©SUPERGT.net All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
