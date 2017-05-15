@@ -1,5 +1,5 @@
 {
     "app_name":"LIVE WATHER",
-    "api_domain":"https://d3t8dtgn3tr812.cloudfront.net/fj/",
+    "api_domain":"https://d3t8dtgn3tr812.cloudfront.net:80/fj/",
     "json_path":"01_201705151703.json"
 }
