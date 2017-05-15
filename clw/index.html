@@ -63,7 +63,6 @@
         };
         req.open("GET",reqURL, true);
         //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        req.setRequestHeader("Origin", "http://inaship.github.io/");
         req.withCredentials = true;
         req.addEventListener('load', onLoadFunc, false);
         req.send(null);
