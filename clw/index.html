@@ -63,6 +63,7 @@
         };
         req.open("GET",reqURL, true);
         //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.setRequestHeader("Origin", "http://inaship.github.io/");
         req.withCredentials = true;
         req.send(null);
         //req.setRequestHeader("X-POTEKA-Authorization", authtext);
