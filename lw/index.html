@@ -41,7 +41,7 @@
           }
         };
         req.open("GET",reqURL, true);
-        //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.setRequestHeader("Content-Type", "application/json");
         req.withCredentials = true;
         req.addEventListener('load', onLoadFunc, false);
         req.send(null);
