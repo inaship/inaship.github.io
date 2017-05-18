@@ -51,10 +51,10 @@
         //
       }
 
-      function createUrl（h） {
+      function createUrl（mH） {
         var dt = new Date();
         // h時間後
-        dt.setHours(dt.getHours() - h);
+        dt.setHours(dt.getHours() - mH);
         // ２分後
         dt.setMinutes(dt.getMinutes() - 2);
         consolse.log(dt);
