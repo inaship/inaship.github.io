@@ -90,6 +90,7 @@
             console.log("watherJson = " + JSON.stringify(watherJson));
           } else {
             var resText = req.statusText;
+            console.log(req.responseText);
             $('#dispArea').val(resText);
           }
         };
