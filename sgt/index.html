@@ -111,6 +111,7 @@
         var tgApi;
         var optionParam;
 
+
         switch(s){
           case 0:case 2:case 4:
             rorf = "/v1/area/real/ja/";
@@ -131,21 +132,21 @@
                         + "&zoomLevel="  + $("#inZoomLevel").val();
             break;
           case 6:case 8:
-            rorf = "/v1/area/real/ja/";
+            rorf = "/v1/point/real/ja/";
             optionParam = "&startDate=" + encodeURIComponent($("#inStartDate").val())
                         + "&endDate="   + encodeURIComponent($("#inEndDate").val());
             break;
           case 7:case 9:
-            rorf = "/v1/area/forecast/ja/";
+            rorf = "/v1/point/forecast/ja/";
             optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
                         + "&interval="   + $("#inInterval").val();
             break;
           case 10:case 12:
-            rorf = "/v1/area/real/ja/";
+            rorf = "/v1/point/real/ja/";
             optionParam = "";
             break;
           case 11:
-            rorf = "/v1/area/forecast/ja/";
+            rorf = "/v1/point/forecast/ja/";
             optionParam = "";
             break;
         }
