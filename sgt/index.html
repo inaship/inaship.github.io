@@ -120,7 +120,7 @@
           case 1 : tgApi = "/v1/area/real/ja/city"
                          + "?jisCode=" + $("#inJisCode_city").val()
                          + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + ($("#inEndDate").val())
+                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
                          + "&poteka=" + $("#inPoteka").val()
                          + "&amedas=" + $("#inAmedas").val()
                          + "&radar=" + $("#inRader").val()
@@ -130,20 +130,20 @@
           case 2 : tgApi = "/v1/point/real/ja/poteka"
                          + "?potekaId=" + $("#inPotekaId").val()
                          + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + ($("#inEndDate").val())
+                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
                          + "&element=" + el;
             break;
           case 3 : tgApi = "/v1/point/real/ja/amedas"
                          + "?amedasId=" + $("#inAmedasId").val()
-                         + "&startDate=" + $("#inStartDate").val()
-                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
+                         //+ "&startDate=" + encodeURIComponent($$("#inStartDate").val())
+                         //+ "&endDate=" + encodeURIComponent($("#inEndDate").val())
                          + "&element=" + el;
             break;
           case 4 : tgApi = "/v1/area/real/rectangle"
                          + "?swPoint=" + $("#inSwPoint").val()
                          + "&nePoint=" + $("#inNePoint").val()
                          + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + ($("#inEndDate").val())
+                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
                          + "&poteka=" + $("#inPoteka").val()
                          + "&amedas=" + $("#inAmedas").val()
                          + "&radar=" + $("#inRader").val()
