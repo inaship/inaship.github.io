@@ -68,7 +68,8 @@
             watherJson = JSON.parse(resText);
             console.log("watherJson = " + JSON.stringify(watherJson));
           } else {
-            var resText = req.statusText;
+            var resText = req.responseText;
+            console.log(req.responseText);
             $('#dispArea').val(resText);
           }
         };
@@ -220,19 +221,7 @@ console.log(rorf);
         }
       }
 
-      function ISODateString(d){
-        function pad(n){return n<10 ? '0'+n : n}
-        return d.getUTCFullYear()+'-'
-          + pad(d.getUTCMonth()+1)+'-'
-          + pad(d.getUTCDate())+'T'
-          + pad(d.getUTCHours())+':'
-          + pad(d.getUTCMinutes())+':'
-          + pad(d.getUTCSeconds())+'+09:00'
-      }
       function getTimeStamp(){
-        //var d = new Date();
-        //var now = ISODateString(d);
-        //console.log(now);
         return formatISO8601(new Date());;
       }
 
