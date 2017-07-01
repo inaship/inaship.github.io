@@ -191,8 +191,7 @@
             break;
         }
         retVal = apiDomain + tgApi;
-        var f = new Boolean($('#isOption').val());
-        if(f) {
+        if($('#isOption').val() == 1) {
           console.log($('#isOption').val());
           retVal += optionParam;
         }
