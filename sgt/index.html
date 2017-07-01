@@ -111,7 +111,7 @@
         var optionParam;
 
         switch(s){
-          case 0, 2, 4 :
+          case 0:case 2:case 4:
             rorf = "/v1/area/real/ja/";
             optionParam = "&startDate=" + encodeURIComponent($("#inStartDate").val())
                         + "&endDate="   + encodeURIComponent($("#inEndtDate").val())
@@ -120,7 +120,7 @@
                         + "&radar="     + $("#inRader").val()
                         + "&zoomLevel=" + $("#inZoomLevel").val();
             break;
-          case 1, 3, 5 :
+          case 1:case 3:case 5:
             rorf = "/v1/area/forecast/ja/";
             optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
                         + "&interval="   + $("#inInterval").val()
@@ -129,17 +129,17 @@
                         + "&radar="      + $("#inRader").val()
                         + "&zoomLevel="  + $("#inZoomLevel").val();
             break;
-          case 6, 8:
+          case 6:case 8:
             rorf = "/v1/area/real/ja/";
             optionParam = "&startDate=" + encodeURIComponent($("#inStartDate").val())
                         + "&endDate="   + encodeURIComponent($("#inEndDate").val());
             break;
-          case 7, 9:
+          case 7:case 9:
             rorf = "/v1/area/forecast/ja/";
             optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
                         + "&interval="   + $("#inInterval").val();
             break;
-          case 10,12 :
+          case 10:case 12:
             rorf = "/v1/area/real/ja/";
             optionParam = "";
             break;
@@ -150,38 +150,38 @@
         }
 console.log(rorf);
         switch(s){
-          case 0, 1: //矩形指定データ取得
+          case 0:case 1: //矩形指定データ取得
             tgApi = rorf + "rectangle"
                   + "?swPoint=" + $("#inSwPoint").val()
                   + "&nePoint=" + $("#inNePoint").val()
                   + "&element=" + el
                   + optionParam;
             break;
-          case 2, 3 : // 都道府県指定データ
+          case 2:case 3 : // 都道府県指定データ
             tgApi = rorf + "prefecture"
                   + "?jisCode=" + $("#inJisCode_pref").val()
                   + "&element=" + el
                   + optionParam;
             break;
-          case 4, 5 : // 市町村指定データ
+          case 4:case 5 : // 市町村指定データ
             tgApi = rorf + "city"
                   + "?jisCode=" + $("#inJisCode_city").val()
                   + "&element=" + el
                   + optionParam;
             break;
-          case 6, 7 : //POTEKA指定データ
+          case 6:case 7 : //POTEKA指定データ
             tgApi = rorf + "poteka"
                   + "?potekaId=" + $("#inPotekaId").val()
                   + "&element="  + el
                    + optionParam;
             break;
-          case 8, 9 : // アメダス指定データ
+          case 8:case 9 : // アメダス指定データ
             tgApi = rorf + "amedas"
                   + "?amedasId=" + $("#inAmedasId").val()
                   + "&element="  + el
                   + optionParam;
             break;
-          case 10, 11 : // 雨雲レーダー指定データ
+          case 10:case 11 : // 雨雲レーダー指定データ
             tgApi = rorf + "radar"
                   + "?zoomLevel=" + $("#inZoomLevel").val()
                   + "&x="         + $("#inX").val()
@@ -486,7 +486,7 @@ console.log(rorf);
               <option value="3">都道府県指定データ（forecast）</option>
               <option value="4">市町村指定データ（real）</option>
               <option value="5">市町村指定データ（forecast）</option>
-              <option value="6" selected="selected">POTEKA指定データ（real）</option>
+              <option value="6">POTEKA指定データ（real）</option>
               <option value="7">POTEKA指定データ（forecast）</option>
               <option value="8">アメダス指定データ（real）</option>
               <option value="9">アメダス指定データ（forecast）</option>
