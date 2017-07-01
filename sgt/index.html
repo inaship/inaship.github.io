@@ -106,15 +106,11 @@
         var s = Number($("#targetAPI").val());
         console.log("elements =" + el );
         console.log("s = " + s);
-        var rorf;
+        var rorf = "/v1/area/real/ja/";
         var tgApi;
         var optionParam;
         //奇数の場合はforecast
-        if(( s % 2 ) === 0 ) {
-          rorf = "/v1/area/real/ja/";
-        } else {
-          rorf = "/v1/area/forecast/ja/";
-        }
+        if(( s % 2 ) != 0 ) rorf = "/v1/area/forecast/ja/";
 
         switch(s){
           case 0, 2, 4 :
