@@ -110,7 +110,7 @@
         var tgApi;
         var optionParam;
         //奇数の場合はforecast
-        if(( s % 2 ) == 0 ) {
+        if(( s % 2 ) === 0 ) {
           rorf = "/v1/area/real/ja/";
         } else {
           rorf = "/v1/area/forecast/ja/";
@@ -153,7 +153,6 @@
                   + "&element=" + el
                   + optionParam;
             break;
-
           case 2, 3 : // 都道府県指定データ
             tgApi = rorf + "prefecture"
                   + "?jisCode=" + $("#inJisCode_pref").val()
@@ -186,7 +185,7 @@
                   + "&datetime="  + encodeURIComponent(getTimeStamp());
             break;
           case 12 : // カメラ画像指定データ取得
-            tgApi = "/v1/point/real/ja/camera"
+            tgApi = rorf + "camera"
                   + "?potekaId=" + $("#inPotekaId").val()
                   + "&datetime=" + encodeURIComponent(getTimeStamp());
             break;
