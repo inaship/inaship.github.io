@@ -89,7 +89,7 @@
             watherJson = JSON.parse(resText);
             console.log("watherJson = " + JSON.stringify(watherJson));
           } else {
-            var resText = req.statusText;
+            var resText = req.responseText;
             console.log(req.responseText);
             $('#dispArea').val(resText);
           }
@@ -106,77 +106,90 @@
         var s = Number($("#targetAPI").val());
         console.log("elements =" + el );
         console.log("s = " + s);
+        var rorf;
         var tgApi;
+        var optionParam;
+        //奇数の場合はforecast
+        if(( s % 2 ) == 0 ) {
+          rorf = "/v1/area/real/ja/";
+        } else {
+          rorf = "/v1/area/forecast/ja/";
+        }
+
         switch(s){
-          case 0 : tgApi = "/v1/area/real/ja/prefecture"
-                         + "?jisCode=" + $("#inJisCode_pref").val()
-                         + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
-                         + "&poteka=" + $("#inPoteka").val()
-                         + "&amedas=" + $("#inAmedas").val()
-                         + "&radar=" + $("#inRader").val()
-                         + "&zoomLevel=" + $("#inZoomLevel").val()
-                         + "&element=" + el;
+          case 0, 2, 4 :
+            optionParam = "&startDate=" + encodeURIComponent($("#inStartDate").val())
+                        + "&endDate="   + encodeURIComponent($("#inEndtDate").val())
+                        + "&poteka="    + $("#inPoteka").val()
+                        + "&amedas="    + $("#inAmedas").val()
+                        + "&radar="     + $("#inRader").val()
+                        + "&zoomLevel=" + $("#inZoomLevel").val();
             break;
-          case 1 : tgApi = "/v1/area/real/ja/city"
-                         + "?jisCode=" + $("#inJisCode_city").val()
-                         + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
-                         + "&poteka=" + $("#inPoteka").val()
-                         + "&amedas=" + $("#inAmedas").val()
-                         + "&radar=" + $("#inRader").val()
-                         + "&zoomLevel=" + $("#inZoomLevel").val()
-                         + "&element=" + el;
+          case 1, 3, 5 :
+            optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
+                        + "&interval="   + $("#inInterval").val()
+                        + "&poteka="     + $("#inPoteka").val()
+                        + "&amedas="     + $("#inAmedas").val()
+                        + "&radar="      + $("#inRader").val()
+                        + "&zoomLevel="  + $("#inZoomLevel").val();
             break;
-          case 2 : tgApi = "/v1/point/real/ja/poteka"
-                         + "?potekaId=" + $("#inPotekaId").val()
-                         + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
-                         + "&element=" + el;
+          case 6, 8:
+            optionParam = "&startDate=" + encodeURIComponent($("#inStartDate").val())
+                        + "&endDate="   + encodeURIComponent($("#inEndDate").val());
             break;
-          case 3 : tgApi = "/v1/point/real/ja/amedas"
-                         + "?amedasId=" + $("#inAmedasId").val()
-                         //+ "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         //+ "&endDate=" + encodeURIComponent($("#inEndDate").val())
-                         + "&element=" + el;
+          case 7, 9:
+            optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
+                        + "&interval="   + $("#inInterval").val();
             break;
-          case 4 : tgApi = "/v1/area/real/rectangle"
-                         + "?swPoint=" + $("#inSwPoint").val()
-                         + "&nePoint=" + $("#inNePoint").val()
-                         + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + encodeURIComponent($("#inEndDate").val())
-                         + "&poteka=" + $("#inPoteka").val()
-                         + "&amedas=" + $("#inAmedas").val()
-                         + "&radar=" + $("#inRader").val()
-                         + "&zoomLevel=" + $("#inZoomLevel").val()
-                         + "&element=" + el;
+          case default:
+            optionParam = "";
+        }
+
+        switch(s){
+          case 0, 1: //矩形指定データ取得
+            tgApi = rorf + "rectangle"
+                  + "?swPoint=" + $("#inSwPoint").val()
+                  + "&nePoint=" + $("#inNePoint").val()
+                  + "&element=" + el
+                  + optionParam;
             break;
-          case 5 : tgApi = "/v1/point/real/ja/radar"
-                         + "?zoomLevel=" + $("#inZoomLevel").val()
-                         + "&x=" + $("#inX").val()
-                         + "&y=" + $("#inY").val()
-                         + "&datetime=" + encodeURIComponent(getTimeStamp());
+
+          case 2, 3 : // 都道府県指定データ
+            tgApi = rorf + "prefecture"
+                  + "?jisCode=" + $("#inJisCode_pref").val()
+                  + "&element=" + el
+                  + optionParam;
             break;
-          case 6 : tgApi = "/v1/area/forecast/rectangle"
-                         + "?swPoint=" + $("#inSwPoint").val()
-                         + "&nePoint=" + $("#inNePoint").val()
-                         + "&dataPeriod=" + $("#inDataPeriod").val()
-                         + "&interval=" + $("#inInterval").val()
-                         + "&poteka=" + $("#inPoteka").val()
-                         + "&amedas=" + $("#inAmedas").val()
-                         + "&radar=" + $("#inRader").val()
-                         + "&zoomLevel=" + $("#inZoomLevel").val()
-                         + "&element=" + el;
+          case 4, 5 : // 市町村指定データ
+            tgApi = rorf + "city"
+                  + "?jisCode=" + $("#inJisCode_city").val()
+                  + "&element=" + el
+                  + optionParam;
             break;
-          default: tgApi = "/v1/area/real/ja/prefecture"
-                         + "?jisCode=" + $("#inJisCode_pref").val()
-                         + "&startDate=" + encodeURIComponent($("#inStartDate").val())
-                         + "&endDate=" + encodeURIComponent($("#inEndtDate").val())
-                         + "&poteka=" + $("#inPoteka").val()
-                         + "&amedas=" + $("#inAmedas").val()
-                         + "&radar=" + $("#inRader").val()
-                         + "&zoomLevel=" + $("#inZoomLevel").val()
-                         + "&element=" + el;
+          case 6, 7 : //POTEKA指定データ
+            tgApi = rorf + "poteka"
+                  + "?potekaId=" + $("#inPotekaId").val()
+                  + "&element="  + el
+                   + optionParam;
+            break;
+          case 8, 9 : // アメダス指定データ
+            tgApi = rorf + "amedas"
+                  + "?amedasId=" + $("#inAmedasId").val()
+                  + "&element="  + el
+                  + optionParam;
+            break;
+          case 10, 11 : // 雨雲レーダー指定データ
+            tgApi = rorf + "radar"
+                  + "?zoomLevel=" + $("#inZoomLevel").val()
+                  + "&x="         + $("#inX").val()
+                  + "&y="         + $("#inY").val()
+                  + "&datetime="  + encodeURIComponent(getTimeStamp());
+            break;
+          case 12 : // カメラ画像指定データ取得
+            tgApi = "/v1/point/real/ja/camera"
+                  + "?potekaId=" + $("#inPotekaId").val()
+                  + "&datetime=" + encodeURIComponent(getTimeStamp());
+            break;
         }
         retVal = apiDomain + tgApi;
         console.log(retVal);
@@ -464,13 +477,19 @@
         <div class="row">
           <div class="input-field col s12 l6">
             <select id="targetAPI">
-              <option value="0">都道府県指定データ</option>
-              <option value="1">市町村指定データ</option>
-              <option value="2" selected="selected">POTEKA指定データ</option>
-              <option value="3">アメダス指定データ</option>
-              <option value="4">矩形指定データ（real）</option>
-              <option value="5">雨雲レーダー指定データ</option>
-              <option value="6">矩形指定データ（forecast）</option>
+              <option value="0">矩形指定データ（real）</option>
+              <option value="1">矩形指定データ（forecast）</option>
+              <option value="2">都道府県指定データ（real）</option>
+              <option value="3">都道府県指定データ（forecast）</option>
+              <option value="4">市町村指定データ（real）</option>
+              <option value="5">市町村指定データ（forecast）</option>
+              <option value="6" selected="selected">POTEKA指定データ（real）</option>
+              <option value="7">POTEKA指定データ（forecast）</option>
+              <option value="8">アメダス指定データ（real）</option>
+              <option value="9">アメダス指定データ（forecast）</option>
+              <option value="10">雨雲レーダー指定データ（real）</option>
+              <option value="11">雨雲レーダー指定データ（forecast）</option>
+              <option value="12">カメラ画像指定データ取得（real）</option>
             </select>
             <label>ターゲットAPI：</label>
           </div>
