@@ -133,7 +133,7 @@
                          + "?zoomLevel=" + $("#inZoomLevel").val()
                          + "&x=" + $("#inX").val()
                          + "&y=" + $("#inY").val()
-                         + "&datetime=" + getTimeStamp();
+                         + "&datetime=" + encodeURIComponent(getTimeStamp());
             break;
           case 6 : tgApi = "/v1/area/forecast/rectangle"
                          + "?swPoint=" + $("#inSwPoint").val()
