@@ -109,11 +109,10 @@
         var rorf = "/v1/area/real/ja/";
         var tgApi;
         var optionParam;
-        //奇数の場合はforecast
-        if(( s % 2 ) != 0 ) rorf = "/v1/area/forecast/ja/";
 
         switch(s){
           case 0, 2, 4 :
+            rorf = "/v1/area/real/ja/";
             optionParam = "&startDate=" + encodeURIComponent($("#inStartDate").val())
                         + "&endDate="   + encodeURIComponent($("#inEndtDate").val())
                         + "&poteka="    + $("#inPoteka").val()
@@ -122,6 +121,7 @@
                         + "&zoomLevel=" + $("#inZoomLevel").val();
             break;
           case 1, 3, 5 :
+            rorf = "/v1/area/forecast/ja/";
             optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
                         + "&interval="   + $("#inInterval").val()
                         + "&poteka="     + $("#inPoteka").val()
@@ -130,14 +130,17 @@
                         + "&zoomLevel="  + $("#inZoomLevel").val();
             break;
           case 6, 8:
+            rorf = "/v1/area/real/ja/";
             optionParam = "&startDate=" + encodeURIComponent($("#inStartDate").val())
                         + "&endDate="   + encodeURIComponent($("#inEndDate").val());
             break;
           case 7, 9:
+            rorf = "/v1/area/forecast/ja/";
             optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
                         + "&interval="   + $("#inInterval").val();
             break;
           default:
+            rorf = "/v1/area/real/ja/";
             optionParam = "";
         }
 
