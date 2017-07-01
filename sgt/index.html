@@ -106,7 +106,7 @@
         var s = Number($("#targetAPI").val());
         console.log("elements =" + el );
         console.log("s = " + s);
-        var rorf = "/v1/area/real/ja/";
+        var rorf;
         var tgApi;
         var optionParam;
 
@@ -139,9 +139,14 @@
             optionParam = "&dataPeriod=" + $("#inDataPeriod").val()
                         + "&interval="   + $("#inInterval").val();
             break;
-          default:
+          case 10,12 :
             rorf = "/v1/area/real/ja/";
             optionParam = "";
+            break;
+          case 11:
+            rorf = "/v1/area/forecast/ja/";
+            optionParam = "";
+            break;
         }
 
         switch(s){
