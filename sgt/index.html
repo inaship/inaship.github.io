@@ -192,7 +192,7 @@
         }
         retVal = apiDomain + tgApi;
 
-        if( Boolean($('#isOption').val())) {
+        if( new Boolean($('#isOption').val()) ) {
           console.log($('#isOption').val());
           retVal += optionParam;
         }
@@ -500,8 +500,8 @@
           </div>
           <div class="input-field col s12 l4">
             <select id="isOption">
-              <option value="true">送る</option>
-              <option value="false">送らない</option>
+              <option value="1">送る</option>
+              <option value="0">送らない</option>
             </select>
             <label>オプション：</label>
           </div>
