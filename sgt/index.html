@@ -109,8 +109,7 @@
         console.log("s = " + s);
         var rorf;
         var tgApi;
-        var optionParam;
-
+        var optionParam = "";
 
         switch(s){
           case 0:case 2:case 4:
@@ -150,38 +149,33 @@
             optionParam = "";
             break;
         }
-console.log(rorf);
+
         switch(s){
           case 0:case 1: //矩形指定データ取得
             tgApi = rorf + "rectangle"
                   + "?swPoint=" + $("#inSwPoint").val()
                   + "&nePoint=" + $("#inNePoint").val()
-                  + "&element=" + el
-                  + optionParam;
+                  + "&element=" + el;
             break;
           case 2:case 3 : // 都道府県指定データ
             tgApi = rorf + "prefecture"
                   + "?jisCode=" + $("#inJisCode_pref").val()
-                  + "&element=" + el
-                  + optionParam;
+                  + "&element=" + el;
             break;
           case 4:case 5 : // 市町村指定データ
             tgApi = rorf + "city"
                   + "?jisCode=" + $("#inJisCode_city").val()
-                  + "&element=" + el
-                  + optionParam;
+                  + "&element=" + el;
             break;
           case 6:case 7 : //POTEKA指定データ
             tgApi = rorf + "poteka"
                   + "?potekaId=" + $("#inPotekaId").val()
-                  + "&element="  + el
-                   + optionParam;
+                  + "&element="  + el;
             break;
           case 8:case 9 : // アメダス指定データ
             tgApi = rorf + "amedas"
                   + "?amedasId=" + $("#inAmedasId").val()
-                  + "&element="  + el
-                  + optionParam;
+                  + "&element="  + el;
             break;
           case 10:case 11 : // 雨雲レーダー指定データ
             tgApi = rorf + "radar"
@@ -197,6 +191,7 @@ console.log(rorf);
             break;
         }
         retVal = apiDomain + tgApi;
+        if($('#isOption').val()) retVal += optionParam;
         console.log(retVal);
         $("#dispUrlArea").val(retVal);
         return retVal;
@@ -480,7 +475,7 @@ console.log(rorf);
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s12 l6">
+          <div class="input-field col s12 l4">
             <select id="targetAPI">
               <option value="0">矩形指定データ（real）</option>
               <option value="1">矩形指定データ（forecast）</option>
@@ -498,7 +493,14 @@ console.log(rorf);
             </select>
             <label>ターゲットAPI：</label>
           </div>
-          <div class="input-field col s12 l6 center-align">
+          <div class="input-field col s12 l4">
+            <select id="isOption">
+              <option value="true">送る</option>
+              <option value="false">送らない</option>
+            </select>
+            <label>オプション：</label>
+          </div>
+          <div class="input-field col s12 l4 center-align">
             <a class="waves-effect waves-light btn-large red darken-4" onclick="getWatherJSON();"><i class="material-icons left">wb_sunny</i>天気データを取得して表示</a>
           </div>
         </div>
