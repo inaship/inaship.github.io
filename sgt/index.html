@@ -230,11 +230,33 @@ console.log(rorf);
           + pad(d.getUTCSeconds())+'+09:00'
       }
       function getTimeStamp(){
-        var d = new Date();
-        var now = ISODateString(d);
-        console.log(now);
-        return now;
+        //var d = new Date();
+        //var now = ISODateString(d);
+        //console.log(now);
+        return formatISO8601(new Date());;
       }
+
+      var formatISO8601 = function (date) {
+       var offset = (function (d) {
+         var o = d.getTimezoneOffset() / -60;
+          return ((0 < o) ? '+' : '-') + ('00' + Math.abs(o)).substr(-2) + ':00';
+        })(date);
+
+        return [
+         [
+           date.getFullYear(),
+            ('00' + (date.getMonth() + 1)).substr(-2),
+            ('00' + date.getDate()).substr(-2)
+          ].join('-'),
+          'T',
+          [
+           date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()
+          ].join(':'),
+          offset
+        ].join('');
+      };
 
       // イニシャライズ
       $(document).ready(function() {
