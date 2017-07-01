@@ -78,6 +78,27 @@
         req.send(null);
       }
 
+      function regetWatherJSON() {
+        var elements = getCheckElements();
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function() {
+          if(req.readyState == 4 && req.status == 200){ // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
+            var resText = req.responseText;
+            $('#dispArea').val(resText);
+            $('#dispArea').trigger('autoresize');
+            watherJson = JSON.parse(resText);
+            console.log("watherJson = " + JSON.stringify(watherJson));
+          } else {
+            var resText = req.statusText;
+            $('#dispArea').val(resText);
+          }
+        };
+        reqUrl = $("#dispUrlArea").val();
+        req.open("GET", reqUrl, false);
+        req.setRequestHeader("X-POTEKA-Authorization", authtext);
+        req.send(null);
+      }
+
       // apiURLを生成
       function createRecUrl(el){
         var retVal;
@@ -457,9 +478,12 @@
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s12 l12">
+          <div class="input-field col s12 l6">
             <textarea id="dispUrlArea" class="materialize-textarea"></textarea>
             <label for="dispUrlArea">送信したリクエスト</label>
+          </div>
+          <div class="input-field col s12 l6 center-align">
+            <a class="waves-effect waves-light btn-large red darken-4" onclick="regetWatherJSON();"><i class="material-icons left">wb_sunny</i>URLで再送信</a>
           </div>
         </div>
         <div class="row">
