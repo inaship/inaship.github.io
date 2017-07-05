@@ -182,12 +182,12 @@
                   + "?zoomLevel=" + $("#inZoomLevel").val()
                   + "&x="         + $("#inX").val()
                   + "&y="         + $("#inY").val()
-                  + "&datetime="  + encodeURIComponent(getTimeStamp());
+                  + "&datetime="  + encodeURIComponent($("#inStartDate").val());
             break;
           case 12 : // カメラ画像指定データ取得
             tgApi = rorf + "camera"
                   + "?potekaId=" + $("#inPotekaId").val()
-                  + "&datetime=" + encodeURIComponent(getTimeStamp());
+                  + "&datetime=" + encodeURIComponent($("#inStartDate").val());
             break;
         }
         retVal = apiDomain + tgApi;
